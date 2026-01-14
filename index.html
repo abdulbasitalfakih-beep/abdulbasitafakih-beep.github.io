@@ -1,94 +1,206 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Web Pribadi Abdul Basit</title>
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, Helvetica, sans-serif;
-            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-            color: white;
-        }
-        header {
-            text-align: center;
-            padding: 80px 20px;
-        }
-        header h1 {
-            font-size: 42px;
-            margin-bottom: 10px;
-        }
-        header p {
-            font-size: 18px;
-            opacity: 0.9;
-        }
-        section {
-            max-width: 900px;
-            margin: auto;
-            padding: 40px 20px;
-        }
-        h2 {
-            border-left: 5px solid #00eaff;
-            padding-left: 15px;
-            margin-bottom: 20px;
-        }
-        .card {
-            background: rgba(255,255,255,0.08);
-            padding: 20px;
-            border-radius: 12px;
-            margin-bottom: 20px;
-        }
-        footer {
-            text-align: center;
-            padding: 20px;
-            font-size: 14px;
-            opacity: 0.7;
-        }
-        a {
-            color: #00eaff;
-            text-decoration: none;
-        }
-        a:hover {
-            text-decoration: underline;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Abdul Basit | Personal Portfolio</title>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+  background: linear-gradient(120deg, #020617, #020617);
+  color: #e5e7eb;
+  overflow-x: hidden;
+}
+
+/* ===== HERO ===== */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.hero h1 {
+  font-size: 56px;
+  color: #38bdf8;
+  animation: fadeDown 1.2s ease;
+}
+
+.hero p {
+  margin-top: 15px;
+  font-size: 18px;
+  color: #cbd5f5;
+  animation: fadeUp 1.2s ease;
+}
+
+.hero a {
+  display: inline-block;
+  margin-top: 30px;
+  padding: 14px 32px;
+  border-radius: 50px;
+  background: #38bdf8;
+  color: #020617;
+  text-decoration: none;
+  font-weight: bold;
+  transition: 0.3s;
+  animation: fadeUp 1.6s ease;
+}
+
+.hero a:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 30px rgba(56,189,248,0.5);
+}
+
+/* ===== SECTION ===== */
+.section {
+  max-width: 1100px;
+  margin: auto;
+  padding: 80px 20px;
+}
+
+.section h2 {
+  font-size: 32px;
+  margin-bottom: 40px;
+  color: #38bdf8;
+}
+
+/* ===== CARD ===== */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 25px;
+}
+
+.card {
+  background: rgba(255,255,255,0.05);
+  padding: 25px;
+  border-radius: 18px;
+  backdrop-filter: blur(10px);
+  transition: 0.4s;
+  animation: fadeUp 1s ease;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+}
+
+/* ===== PORTFOLIO ===== */
+.project {
+  background: linear-gradient(135deg, #020617, #020617);
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+/* ===== FOOTER ===== */
+footer {
+  text-align: center;
+  padding: 30px;
+  color: #94a3b8;
+  font-size: 14px;
+}
+
+/* ===== ANIMATION ===== */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeDown {
+  from {
+    opacity: 0;
+    transform: translateY(-40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+</style>
 </head>
+
 <body>
 
-<header>
+<!-- HERO -->
+<section class="hero">
+  <div>
     <h1>Abdul Basit</h1>
-    <p>Web Pribadi | Belajar | Berkembang | Konsisten</p>
-</header>
+    <p>Personal Website • Portfolio • Learning Journey</p>
+    <a href="#portfolio">Lihat Portfolio</a>
+  </div>
+</section>
 
-<section>
-    <h2>Tentang Saya</h2>
+<!-- ABOUT -->
+<section class="section">
+  <h2>👋 Tentang Saya</h2>
+  <div class="cards">
     <div class="card">
-        <p>
-            Halo, saya Abdul Basit. Ini adalah website pribadi saya yang saya gunakan
-            untuk belajar, berbagi, dan mendokumentasikan perjalanan saya di dunia digital.
-        </p>
+      <p>
+        Saya Abdul Basit. Website ini adalah landing page pribadi
+        untuk memperkenalkan diri, menampilkan project, dan perjalanan
+        belajar saya di dunia digital.
+      </p>
     </div>
+  </div>
+</section>
 
-    <h2>Keahlian</h2>
-    <div class="card">
-        <ul>
-            <li>Dasar HTML & CSS</li>
-            <li>Belajar Cyber Security</li>
-            <li>Konten Kreator (Video & Desain)</li>
-            <li>Trading & Saham (Pemula)</li>
-        </ul>
-    </div>
+<!-- SKILLS -->
+<section class="section">
+  <h2>🚀 Keahlian</h2>
+  <div class="cards">
+    <div class="card">HTML & CSS</div>
+    <div class="card">Cyber Security (Learning)</div>
+    <div class="card">Content Creator</div>
+    <div class="card">Trading & Saham</div>
+  </div>
+</section>
 
-    <h2>Kontak</h2>
-    <div class="card">
-        <p>Email: <a href="mailto:emailkamu@gmail.com">emailkamu@gmail.com</a></p>
-        <p>GitHub: <a href="https://github.com/usernamekamu" target="_blank">github.com/usernamekamu</a></p>
+<!-- PORTFOLIO -->
+<section id="portfolio" class="section">
+  <h2>🧩 Portfolio / Project</h2>
+  <div class="cards">
+    <div class="card project">
+      <h3>Personal Website</h3>
+      <p>Website pribadi berbasis HTML & GitHub Pages.</p>
     </div>
+    <div class="card project">
+      <h3>Landing Page</h3>
+      <p>Desain landing page aesthetic & responsive.</p>
+    </div>
+    <div class="card project">
+      <h3>Learning Cyber Security</h3>
+      <p>Dokumentasi proses belajar dan praktik.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section">
+  <h2>📫 Kontak</h2>
+  <div class="cards">
+    <div class="card">
+      <p>Email: emailkamu@gmail.com</p>
+      <p>GitHub: github.com/abdulbasitafakih-beep</p>
+    </div>
+  </div>
 </section>
 
 <footer>
-    © 2026 Abdul Basit | Dibuat dengan HTML
+  © 2026 Abdul Basit • Portfolio Website
 </footer>
 
 </body>
