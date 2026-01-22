@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>NOXA INFINITE INJECTOR</title>
+    <style>
+        :root { --p: #fe2c55; --s: #25f4ee; --bg: #000; }
+        body { background: var(--bg); color: #00ff00; font-family: 'Courier New', monospace; margin: 0; padding: 20px; }
+        .wrapper { border: 2px solid var(--p); max-width: 600px; margin: auto; background: #0a0a0a; padding: 20px; box-shadow: 0 0 50px var(--p); border-radius: 15px; }
+        .glitch { font-size: 24px; font-weight: bold; text-transform: uppercase; color: #fff; text-shadow: 2px 2px var(--p), -2px -2px var(--s); animation: glitch 1s infinite; }
+        @keyframes glitch { 0% { transform: translate(0); } 20% { transform: translate(-2px, 2px); } 40% { transform: translate(-2px, -2px); } 60% { transform: translate(2px, 2px); } 80% { transform: translate(2px, -2px); } 100% { transform: translate(0); } }
+        input { width: 100%; padding: 15px; background: #111; border: 1px solid var(--s); color: #fff; margin: 15px 0; font-size: 18px; text-align: center; }
+        .btn-main { width: 100%; padding: 20px; background: var(--p); color: #fff; border: none; font-weight: bold; cursor: pointer; font-size: 18px; transition: 0.3s; box-shadow: 0 0 20px var(--p); }
+        .btn-main:hover { background: #fff; color: var(--p); box-shadow: 0 0 40px #fff; }
+        .monitor { background: #050505; border: 1px solid #333; height: 200px; margin-top: 20px; padding: 10px; font-size: 12px; overflow-y: scroll; color: var(--s); }
+        .status-badge { display: inline-block; padding: 5px 10px; background: #222; border: 1px solid var(--s); border-radius: 5px; font-size: 10px; margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+
+<div class="wrapper">
+    <div class="glitch">NOXA INFINITE INJECTOR</div>
+    <p style="color: #888; font-size: 12px;">SURS CORE BYPASS: ACTIVE | MODE: UNLIMITED PROPAGATION</p>
+    
+    <div class="status-badge">DATABASE: 4.8M HQ ACCOUNTS</div>
+    <div class="status-badge">PROXY: ROTATING (GLOBAL)</div>
+
+    <input type="text" id="userTiktok" placeholder="@USERNAME_TIKTOK">
+    
+    <button class="btn-main" onclick="startInfiniteLoop()">ACTIVATE INFINITE ADDITION</button>
+    
+    <div class="monitor" id="mon">
+        > System Online. Waiting for target...
+    </div>
+</div>
+
+<script>
+    let isRunning = false;
+    let totalAdded = 0;
+
+    function startInfiniteLoop() {
+        const user = document.getElementById('userTiktok').value;
+        const mon = document.getElementById('mon');
+        if(!user) { alert("Masukkan Username!"); return; }
+
+        if(isRunning) return;
+        isRunning = true;
+        
+        mon.innerHTML += `<br>> [CRITICAL] Initializing Infinite Loop for ${user}...`;
+        mon.innerHTML += `<br>> [SURS] Bypassing TikTok Algorithm Security...`;
+        
+        // Simulasikan penambahan terus menerus
+        setInterval(() => {
+            let batch = Math.floor(Math.random() * 5) + 1;
+            totalAdded += batch;
+            let time = new Date().toLocaleTimeString();
+            
+            // Log simulasi aktivitas
+            mon.innerHTML = `[${time}] > INJECTED ${batch} FOLLOWERS (SUCCESS)<br>` + mon.innerHTML;
+            mon.innerHTML = `<span style="color:yellow">> TOTAL ADDED: ${totalAdded}</span><br>` + mon.innerHTML;
+            
+            // Menjaga agar log tidak terlalu berat
+            if (mon.innerHTML.length > 5000) {
+                mon.innerHTML = mon.innerHTML.substring(0, 5000);
+            }
+        }, 3000); // Setiap 3 detik menambah secara otomatis
+    }
+</script>
+
+</body>
+</html>
