@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CEO Executive Portal | Personal Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Reset dan Base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #1a365d;
+            --secondary: #2d3748;
+            --accent: #4299e1;
+            --gold: #d69e2e;
+            --light: #f7fafc;
+            --dark: #1a202c;
+            --success: #48bb78;
+            --danger: #f56565;
+            --warning: #ed8936;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: var(--light);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Header & Navigation */
+        .header {
+            background: rgba(26, 54, 93, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1.2rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border-bottom: 3px solid var(--gold);
+        }
+
+        .logo {
+            font-size: 2.2rem;
+            font-weight: 800;
+            background: linear-gradient(45deg, #4299e1, #d69e2e);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo i {
+            margin-right: 10px;
+            font-size: 2.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            padding: 0.5rem 1.2rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-links a:hover {
+            background: var(--accent);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(66, 153, 225, 0.4);
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .user-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 3px solid var(--gold);
+            object-fit: cover;
+        }
+
+        /* Main Layout */
+        .container {
+            margin-top: 100px;
+            padding: 2rem;
+            max-width: 100%;
+        }
+
+        /* Dashboard Grid */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 3rem;
+        }
+
+        /* Cards */
+        .card {
+            background: rgba(45, 55, 72, 0.85);
+            border-radius: 15px;
+            padding: 1.8rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--accent), var(--gold));
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card-title i {
+            color: var(--gold);
+        }
+
+        .card-badge {
+            background: var(--accent);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        /* Stats Cards */
+        .stat-card {
+            text-align: center;
+            background: linear-gradient(145deg, rgba(66, 153, 225, 0.15), rgba(26, 54, 93, 0.15));
+        }
+
+        .stat-number {
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: linear-gradient(45deg, #4299e1, #d69e2e);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            line-height: 1;
+            margin: 1rem 0;
+        }
+
+        .stat-label {
+            color: #cbd5e0;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Quick Actions */
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 15px;
+            margin-top: 1.5rem;
+        }
+
+        .action-btn {
+            background: rgba(66, 153, 225, 0.2);
+            border: 2px solid var(--accent);
+            color: white;
+            padding: 1rem;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .action-btn:hover {
+            background: var(--accent);
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(66, 153, 225, 0.3);
+        }
+
+        .action-btn i {
+            font-size: 1.8rem;
+        }
+
+        /* Tables */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        .data-table th {
+            background: rgba(26, 54, 93, 0.7);
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+            color: var(--gold);
+            border-bottom: 2px solid var(--accent);
+        }
+
+        .data-table td {
+            padding: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .data-table tr:hover {
+            background: rgba(66, 153, 225, 0.1);
+        }
+
+        .status-badge {
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .status-active {
+            background: rgba(72, 187, 120, 0.2);
+            color: #48bb78;
+        }
+
+        .status-pending {
+            background: rgba(237, 137, 54, 0.2);
+            color: #ed8936;
+        }
+
+        /* Charts Container */
+        .chart-container {
+            height: 300px;
+            width: 100%;
+            margin-top: 1.5rem;
+            position: relative;
+        }
+
+        .fake-chart {
+            display: flex;
+            align-items: flex-end;
+            height: 100%;
+            gap: 10px;
+            padding: 1rem;
+        }
+
+        .chart-bar {
+            flex: 1;
+            background: linear-gradient(to top, var(--accent), #63b3ed);
+            border-radius: 5px 5px 0 0;
+            min-height: 10px;
+            position: relative;
+        }
+
+        .chart-bar::after {
+            content: attr(data-value);
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        /* Notifications */
+        .notification-item {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            gap: 15px;
+        }
+
+        .notification-item:hover {
+            background: rgba(66, 153, 225, 0.1);
+        }
+
+        .notification-icon {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .notification-icon.urgent {
+            background: rgba(245, 101, 101, 0.2);
+            color: #f56565;
+        }
+
+        .notification-icon.info {
+            background: rgba(66, 153, 225, 0.2);
+            color: #4299e1;
+        }
+
+        .notification-icon.success {
+            background: rgba(72, 187, 120, 0.2);
+            color: #48bb78;
+        }
+
+        /* Calendar */
+        .calendar {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 8px;
+            margin-top: 1.5rem;
+        }
+
+        .calendar-header {
+            text-align: center;
+            font-weight: 700;
+            padding: 0.5rem;
+            color: var(--gold);
+        }
+
+        .calendar-day {
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .calendar-day:hover {
+            background: var(--accent);
+        }
+
+        .calendar-day.today {
+            background: var(--gold);
+            color: var(--dark);
+            font-weight: 700;
+        }
+
+        .calendar-day.event {
+            border: 2px solid var(--accent);
+        }
+
+        /* Footer */
+        .footer {
+            background: rgba(26, 54, 93, 0.95);
+            padding: 2rem;
+            margin-top: 3rem;
+            border-top: 3px solid var(--gold);
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 1.5rem 0;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: #cbd5e0;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--gold);
+        }
+
+        .copyright {
+            color: #a0aec0;
+            font-size: 0.9rem;
+            margin-top: 1.5rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .dashboard-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                padding: 1rem;
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1rem;
+            }
+            
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .container {
+                margin-top: 160px;
+                padding: 1rem;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card, .header, .footer {
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--secondary);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--gold);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="logo">
+            <i class="fas fa-crown"></i>CEO PORTAL
+        </div>
+        
+        <nav>
+            <ul class="nav-links">
+                <li><a href="#"><i class="fas fa-home"></i> Dashboard</a></li>
+                <li><a href="#"><i class="fas fa-chart-line"></i> Analytics</a></li>
+                <li><a href="#"><i class="fas fa-users"></i> Team</a></li>
+                <li><a href="#"><i class="fas fa-project-diagram"></i> Projects</a></li>
+                <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
+                <li><a href="#"><i class="fas fa-bell"></i> Notifications <span class="card-badge">12</span></a></li>
+            </ul>
+        </nav>
+        
+        <div class="user-profile">
+            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&auto=format&fit=crop&w=200&q=80" alt="CEO" class="user-avatar">
+            <div>
+                <h3 style="color:white;">CEO Name</h3>
+                <p style="color:#cbd5e0; font-size:0.9rem;">Chief Executive Officer</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Welcome Banner -->
+        <div class="card" style="grid-column: 1 / -1; margin-bottom: 2rem;">
+            <div class="card-header">
+                <h1 class="card-title"><i class="fas fa-rocket"></i> Welcome Back, CEO!</h1>
+                <div class="card-badge">VIP EXECUTIVE ACCESS</div>
+            </div>
+            <p style="font-size: 1.1rem; line-height: 1.6; color: #cbd5e0;">
+                Your personal command center with real-time analytics, team management, project tracking, and strategic tools. All systems operational.
+            </p>
+        </div>
+
+        <!-- Dashboard Grid -->
+        <div class="dashboard-grid">
+            <!-- Stats Cards -->
+            <div class="card stat-card">
+                <h2 class="card-title"><i class="fas fa-dollar-sign"></i> Revenue</h2>
+                <div class="stat-number">$4.8M</div>
+                <p class="stat-label">This Quarter</p>
+                <div style="color:#48bb78; font-size:0.9rem; margin-top:10px;">
+                    <i class="fas fa-arrow-up"></i> 24.5% increase
+                </div>
+            </div>
+
+            <div class="card stat-card">
+                <h2 class="card-title"><i class="fas fa-chart-bar"></i> Growth</h2>
+                <div class="stat-number">38.2%</div>
+                <p class="stat-label">Year Over Year</p>
+                <div style="color:#48bb78; font-size:0.9rem; margin-top:10px;">
+                    <i class="fas fa-arrow-up"></i> 12.3% target exceed
+                </div>
+            </div>
+
+            <div class="card stat-card">
+                <h2 class="card-title"><i class="fas fa-users"></i> Team</h2>
+                <div class="stat-number">247</div>
+                <p class="stat-label">Active Members</p>
+                <div style="color:#4299e1; font-size:0.9rem; margin-top:10px;">
+                    <i class="fas fa-user-plus"></i> 15 new hires
+                </div>
+            </div>
+
+            <div class="card stat-card">
+                <h2 class="card-title"><i class="fas fa-tasks"></i> Projects</h2>
+                <div class="stat-number">42</div>
+                <p class="stat-label">In Progress</p>
+                <div style="color:#ed8936; font-size:0.9rem; margin-top:10px;">
+                    <i class="fas fa-clock"></i> 6 behind schedule
+                </div>
+            </div>
+
+            <!-- Performance Chart -->
+            <div class="card" style="grid-column: span 2;">
+                <div class="card-header">
+                    <h2 class="card-title"><i class="fas fa-chart-line"></i> Performance Metrics</h2>
+                    <div class="card-badge">REAL-TIME</div>
+                </div>
+                <div class="chart-container">
+                    <div class="fake-chart">
+                        <div class="chart-bar" style="height: 85%;" data-value="$85K"></div>
+                        <div class="chart-bar" style="height: 70%;" data-value="$70K"></div>
+                        <div class="chart-bar" style="height: 95%;" data-value="$95K"></div>
+                        <div class="chart-bar" style="height: 60%;" data-value="$60K"></div>
+                        <div class="chart-bar" style="height: 80%;" data-value="$80K"></div>
+                        <div class="chart-bar" style="height: 90%;" data-value="$90K"></div>
+                        <div class="chart-bar" style="height: 75%;" data-value="$75K"></div>
+                    </div>
+                </div>
+                <div style="display: flex; justify-content: space-between; margin-top: 1rem; color: #cbd5e0;">
+                    <span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title"><i class="fas fa-bolt"></i> Quick Actions</h2>
+                </div>
+                <div class="quick-actions">
+                    <button class="action-btn">
+                        <i class="fas fa-file-invoice-dollar"></i>
+                        Approve Invoices
+                    </button>
+                    <button class="action-btn">
+                        <i class="fas fa-video"></i>
+                        Start Meeting
+                    </button>
+                    <button class="action-btn">
+                        <i class="fas fa-pen"></i>
+                        Sign Documents
+                    </button>
+                    <button class="action-btn">
+                        <i class="fas fa-chart-pie"></i>
+                        Generate Report
+                    </button>
+                    <button class="action-btn">
+                        <i class="fas fa-user-plus"></i>
+                        Hire Talent
+                    </button>
+                    <button class="action-btn">
+                        <i class="fas fa-shield-alt"></i>
+                        Security Check
+                    </button>
+                </div>
+            </div>
+
+            <!-- Recent Projects -->
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title"><i class="fas fa-project-diagram"></i> Recent Projects</h2>
+                    <div class="card-badge">6 ACTIVE</div>
+                </div>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Project</th>
+                            <th>Status</th>
+                            <th>Progress</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Quantum AI Integration</td>
+                            <td><span class="status-badge status-active">Active</span></td>
+                            <td>85%</td>
+                        </tr>
+                        <tr>
+                            <td>Global Market Expansion</td>
+                            <td><span class="status-badge status-active">Active</span></td>
+                            <td>72%</td>
+                        </tr>
+                        <tr>
+                            <td>Cybersecurity Overhaul</td>
+                            <td><span class="status-badge status-pending">Pending</span></td>
+                            <td>30%</td>
+                        </tr>
+                        <tr>
+                            <td>Mobile Platform v4.0</td>
+                            <td><span class="status-badge status-active">Active</span></td>
+                            <td>68%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Notifications -->
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title"><i class="fas fa-bell"></i> Notifications</h2>
+                    <div class="card-badge">12 NEW</div>
+                </div>
+                <div>
+                    <div class="notification-item">
+                        <div class="notification-icon urgent">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <div>
+                            <p style="font-weight:600;">Server Maintenance Required</p>
+                            <p style="color:#cbd5e0; font-size:0.9rem;">Critical update needed for data center</p>
+                        </div>
+                    </div>
+                    <div class="notification-item">
+                        <div class="notification-icon info">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                        <div>
+                            <p style="font-weight:600;">New Partnership Proposal</p>
+                            <p style="color:#cbd5e0; font-size:0.9rem;">TechGlobal Corp wants to collaborate</p>
+                        </div>
+                    </div>
+                    <div class="notification-item">
+                        <div class="notification-icon success">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                        <div>
+                            <p style="font-weight:600;">Quarterly Target Achieved</p>
+                            <p style="color:#cbd5e0; font-size:0.9rem;">Revenue goals exceeded by 18%</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Calendar -->
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title"><i class="fas fa-calendar-alt"></i> Executive Calendar</h2>
+                    <div class="card-badge">TODAY</div>
+                </div>
+                <div class="calendar">
+                    <div class="calendar-header">Sun</div>
+                    <div class="calendar-header">Mon</div>
+                    <div class="calendar-header">Tue</div>
+                    <div class="calendar-header">Wed</div>
+                    <div class="calendar-header">Thu</div>
+                    <div class="calendar-header">Fri</div>
+                    <div class="calendar-header">Sat</div>
+                    
+                    <!-- Calendar Days (simplified) -->
+                    <div class="calendar-day">28</div>
+                    <div class="calendar-day">29</div>
+                    <div class="calendar-day">30</div>
+                    <div class="calendar-day">31</div>
+                    <div class="calendar-day">1</div>
+                    <div class="calendar-day">2</div>
+                    <div class="calendar-day">3</div>
+                    
+                    <div class="calendar-day">4</div>
+                    <div class="calendar-day">5</div>
+                    <div class="calendar-day">6</div>
+                    <div class="calendar-day">7</div>
+                    <div class="calendar-day today">8</div>
+                    <div class="calendar-day event">9</div>
+                    <div class="calendar-day">10</div>
+                    
+                    <div class="calendar-day">11</div>
+                    <div class="calendar-day">12</div>
+                    <div class="calendar-day event">13</div>
+                    <div class="calendar-day">14</div>
+                    <div class="calendar-day">15</div>
+                    <div class="calendar-day">16</div>
+                    <div class="calendar-day">17</div>
+                </div>
+                <div style="margin-top:1.5rem;">
+                    <p style="color:var(--gold); font-weight:600;"><i class="fas fa-clock"></i> Today's Schedule</p>
+                    <p style="color:#cbd5e0; margin-top:0.5rem;">10:00 AM - Board Meeting</p>
+                    <p style="color:#cbd5e0;">2:30 PM - Investor Call</p>
+                    <p style="color:#cbd5e0;">6:00 PM - Product Launch</p>
+                </div>
+            </div>
+
+            <!-- System Status -->
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title"><i class="fas fa-server"></i> System Status</h2>
+                    <div class="card-badge" style="background:var(--success);">ALL GREEN</div>
+                </div>
+                <div style="margin-top:1rem;">
+                    <div style="display:flex; justify-content:space-between; margin-bottom:0.8rem;">
+                        <span>Database Cluster</span>
+                        <span style="color:#48bb78;"><i class="fas fa-check-circle"></i> Online</span>
+                    </div>
+                    <div style="display:flex; justify-content:space-between; margin-bottom:0.8rem;">
+                        <span>API Gateway</span>
+                        <span style="color:#48bb78;"><i class="fas fa-check-circle"></i> Operational</span>
+                    </div>
+                    <div style="display:flex; justify-content:space-between; margin-bottom:0.8rem;">
+                        <span>Cloud Storage</span>
+                        <span style="color:#48bb78;"><i class="fas fa-check-circle"></i> 97% Capacity</span>
+                    </div>
+                    <div style="display:flex; justify-content:space-between; margin-bottom:0.8rem;">
+                        <span>Security Systems</span>
+                        <span style="color:#48bb78;"><i class="fas fa-check-circle"></i> Active</span>
+                    </div>
+                </div>
+                <button class="action-btn" style="margin-top:1.5rem; width:100%;">
+                    <i class="fas fa-sync-alt"></i> Run Full Diagnostic
+                </button>
+            </div>
+        </div>
+
+        <!-- Additional Features Section -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; margin-top: 2rem;">
+            <!-- File Manager -->
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title"><i class="fas fa-folder"></i> Recent Files</h2>
+                </div>
+                <div style="margin-top:1rem;">
+                    <div style="display:flex; justify-content:space-between; padding:0.8rem 0; border-bottom:1px solid rgba(255,255,255,0.1);">
+                        <span><i class="fas fa-file-pdf" style="color:#f56565;"></i> Q4_Financial_Report.pdf</span>
+                        <span style="color:#cbd5e0; font-size:0.9rem;">2.4 MB</span>
+                    </div>
+                    <div style="display:flex; justify-content:space-between; padding:0.8rem 0; border-bottom:1px solid rgba(255,255,255,0.1);">
+                        <span><i class="fas fa-file-excel" style="color:#48bb78;"></i> Market_Analysis.xlsx</span>
+                        <span style="color:#cbd5e0; font-size:0.9rem;">5.7 MB</span>
+                    </div>
+                    <div style="display:flex; justify-content:space-between; padding:0.8rem 0;">
+                        <span><i class="fas fa-file-word" style="color:#4299e1;"></i> Contract_Draft.docx</span>
+                        <span style="color:#cbd5e0; font-size:0.9rem;">1.8 MB</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Team Performance -->
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title"><i class="fas fa-medal"></i> Top Performers</h2>
+                </div>
+                <div style="margin-top:1rem;">
+                    <div style="display:flex; align-items:center; justify-content:space-between; padding:0.8rem 0; border-bottom:1px solid rgba(255,255,255,0.1);">
+                        <div style="display:flex; align-items:center; gap:10px;">
+                            <div style="width:35px; height:35px; border-radius:50%; background:var(--accent); display:flex; align-items:center; justify-content:center;">
+                                <span style="font-weight:600;">JS</span>
+                            </div>
+                            <span>John Smith</span>
+                        </div>
+                        <span style="color:var(--gold); font-weight:600;">+42%</span>
+                    </div>
+                    <div style="display:flex; align-items:center; justify-content:space-between; padding:0.8rem 0; border-bottom:1px solid rgba(255,255,255,0.1);">
+                        <div style="display:flex; align-items:center; gap:10px;">
+                            <div style="width:35px; height:35px; border-radius:50%; background:var(--success); display:flex; align-items:center; justify-content:center;">
+                                <span style="font-weight:600;">MA</span>
+                            </div>
+                            <span>Maria Anderson</span>
+                        </div>
+                        <span style="color:var(--gold); font-weight:600;">+38%</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Market News -->
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title"><i class="fas fa-newspaper"></i> Market News</h2>
+                </div>
+                <div style="margin-top:1rem;">
+                    <p style="color:#cbd5e0; border-left:3px solid var(--accent); padding-left:10px;">
+                        Tech stocks surge 3.2% on AI breakthrough news
+                    </p>
+                    <p style="color:#cbd5e0; margin-top:0.8rem; border-left:3px solid var(--gold); padding-left:10px;">
+                        Global supply chain stabilizing, shipping costs down 15%
+                    </p>
+                    <p style="color:#cbd5e0; margin-top:0.8rem; border-left:3px solid var(--success); padding-left:10px;">
+                        New green energy incentives announced by government
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="logo" style="font-size:1.8rem; justify-content:center;">
+            <i class="fas fa-crown"></i>CEO EXECUTIVE PORTAL
+        </div>
+        
+        <div class="footer-links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+            <a href="#">Security</a>
+            <a href="#">Documentation</a>
+            <a href="#">Support</a>
+            <a href="#">Contact</a>
+        </div>
+        
+        <div style="margin-top:1.5rem;">
+            <button class="action-btn" style="display:inline-flex; margin:0 0.5rem;">
+                <i class="fas fa-download"></i> Export Data
+            </button>
+            <button class="action-btn" style="display:inline-flex; margin:0 0.5rem;">
+                <i class="fas fa-print"></i> Print Report
+            </button>
+            <button class="action-btn" style="display:inline-flex; margin:0 0.5rem; background:var(--danger); border-color:var(--danger);">
+                <i class="fas fa-power-off"></i> Emergency Lockdown
+            </button>
+        </div>
+        
+        <p class="copyright">
+            © 2024 CEO Executive Portal v4.0 | All Rights Reserved | Powered by Noxa Core AI System<br>
+            Last Updated: Today 10:42 AM | Session ID: NOXA-CEO-2024-8X7Z9P
+        </p>
+    </footer>
+
+    <script>
+        // Interaktifitas dasar
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animasi tombol
+            const actionButtons = document.querySelectorAll('.action-btn');
+            actionButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const icon = this.querySelector('i');
+                    const originalIcon = icon.className;
+                    
+                    // Animasi klik
+                    this.style.transform = 'scale(0.95)';
+                    
+                    // Ganti icon sementara
+                    icon.className = 'fas fa-check';
+                    this.style.background = 'var(--success)';
+                    this.style.borderColor = 'var(--success)';
+                    
+                    setTimeout(() => {
+                        this.style.transform = '';
+                        icon.className = originalIcon;
+                        this.style.background = '';
+                        this.style.borderColor = '';
+                    }, 1000);
+                    
+                    // Notifikasi
+                    const actionText = this.textContent.trim();
+                    console.log(`Action executed: ${actionText}`);
+                });
+            });
+            
+            // Update waktu real-time
+            function updateDateTime() {
+                const now = new Date();
+                const dateStr = now.toLocaleDateString('en-US', { 
+                    weekday: 'long', 
+                    year: 'numeric', 
+                    month: 'long', 
+                    day: 'numeric' 
+                });
+                const timeStr = now.toLocaleTimeString('en-US', { 
+                    hour12: true, 
+                    hour: '2-digit', 
+                    minute: '2-digit' 
+                });
+                
+                // Cari elemen untuk menampilkan waktu
+                const timeElement = document.querySelector('.logo + div p');
+                if (timeElement && timeElement.textContent.includes('Chief')) {
+                    // Tambahkan waktu di samping nama
+                    const timeDisplay = document.createElement('div');
+                    timeDisplay.style.fontSize = '0.8rem';
+                   
