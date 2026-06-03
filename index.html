@@ -1,342 +1,563 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-  <title>Abdul Basit Al Fakih | Portofolio PKL</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abdul Basit Al Fakih | TJKT Portfolio · Cloud & Network Expert</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    body {
-      background: #0a0c10;
-      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, sans-serif;
-      color: #eef2ff;
-      line-height: 1.5;
-    }
+        body {
+            background: #f0f4f9;
+            font-family: 'Inter', sans-serif;
+            color: #1a2634;
+            line-height: 1.5;
+        }
 
-    /* full padat, gaada margin lebar */
-    .container {
-      max-width: 1400px;
-      margin: 0 auto;
-      background: #0f1117;
-    }
+        /* LAYOUT FULL PADAT - WARNA CERAH */
+        .master {
+            max-width: 1600px;
+            margin: 0 auto;
+            background: #ffffff;
+            box-shadow: 0 0 20px rgba(0,0,0,0.03);
+        }
 
-    /* navbar sederhana */
-    .navbar {
-      background: #080b12;
-      padding: 1rem 2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      border-bottom: 1px solid #1e293b;
-    }
+        /* navbar premium cerah */
+        .nav-premium {
+            background: #ffffff;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            border-bottom: 2px solid #e2e8f0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(255,255,255,0.98);
+        }
 
-    .logo {
-      font-weight: 700;
-      font-size: 1.5rem;
-      letter-spacing: -0.5px;
-      background: linear-gradient(135deg, #ffffff, #94a3b8);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
+        .logo-name {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #0f2b3d, #1e6f5c, #2c9e8e);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: -0.5px;
+        }
 
-    .nav-links {
-      display: flex;
-      gap: 2rem;
-      font-weight: 500;
-    }
+        .nav-links a {
+            color: #2c3e50;
+            text-decoration: none;
+            margin-left: 2rem;
+            font-weight: 600;
+            transition: 0.2s;
+            font-size: 0.9rem;
+        }
 
-    .nav-links a {
-      color: #cbd5e6;
-      text-decoration: none;
-      transition: 0.2s;
-    }
+        .nav-links a:hover { color: #1e6f5c; }
 
-    .nav-links a:hover {
-      color: white;
-    }
+        /* hero section dengan FOTO - versi cerah */
+        .hero-photo {
+            display: grid;
+            grid-template-columns: 0.8fr 1.7fr;
+            gap: 2rem;
+            padding: 2.5rem 2rem;
+            background: linear-gradient(135deg, #f8fafc 0%, #eef2f8 100%);
+            border-bottom: 1px solid #e2e8f0;
+        }
 
-    /* HERO section — padat kaya CEO */
-    .hero {
-      display: grid;
-      grid-template-columns: 1fr 1.2fr;
-      gap: 2rem;
-      padding: 2.5rem 2rem;
-      background: #0b0e15;
-      border-bottom: 1px solid #1e293b;
-    }
+        .photo-frame {
+            background: white;
+            border-radius: 32px;
+            padding: 0.8rem;
+            border: 1px solid #cbd5e1;
+            box-shadow: 0 20px 30px -12px rgba(0,0,0,0.08);
+        }
 
-    .hero-left h1 {
-      font-size: 3rem;
-      font-weight: 700;
-      line-height: 1.2;
-      margin-bottom: 1rem;
-      letter-spacing: -1px;
-    }
+        .photo-frame img {
+            width: 100%;
+            border-radius: 24px;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+            display: block;
+        }
 
-    .hero-left .highlight {
-      color: #3b82f6;
-      border-bottom: 2px solid #3b82f6;
-      display: inline-block;
-    }
+        .hero-bio h1 {
+            font-size: 3.2rem;
+            font-weight: 800;
+            line-height: 1.2;
+            letter-spacing: -2px;
+            color: #0f2b3d;
+        }
 
-    .badge {
-      background: #1e293b;
-      display: inline-block;
-      padding: 0.25rem 1rem;
-      border-radius: 30px;
-      font-size: 0.85rem;
-      margin: 1rem 0;
-      color: #93c5fd;
-    }
+        .hero-bio .wikrama {
+            color: #1e6f5c;
+            border-bottom: 4px solid #1e6f5c;
+            display: inline-block;
+        }
 
-    .hero-right {
-      background: #11161f;
-      padding: 1.5rem;
-      border-radius: 24px;
-      border: 1px solid #1f2a3e;
-    }
+        .badge-list {
+            display: flex;
+            gap: 1rem;
+            margin: 1.2rem 0;
+            flex-wrap: wrap;
+        }
 
-    .info-item {
-      display: flex;
-      justify-content: space-between;
-      padding: 0.75rem 0;
-      border-bottom: 1px solid #1e2a3a;
-    }
+        .badge-premium {
+            background: #e6f4f1;
+            padding: 0.3rem 1rem;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #1e6f5c;
+        }
 
-    .info-label {
-      font-weight: 600;
-      color: #9ca3af;
-    }
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.8rem;
+            flex-wrap: wrap;
+        }
 
-    /* bagian skill & tools full grid */
-    .section-full {
-      padding: 2.5rem 2rem;
-      border-bottom: 1px solid #1e293b;
-    }
+        .btn-primary {
+            background: #1e6f5c;
+            padding: 0.8rem 1.8rem;
+            border-radius: 40px;
+            text-decoration: none;
+            color: white;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: 0.2s;
+        }
 
-    .section-title {
-      font-size: 1.8rem;
-      font-weight: 600;
-      margin-bottom: 2rem;
-      letter-spacing: -0.3px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
+        .btn-primary:hover { background: #0f5a49; }
 
-    .section-title span {
-      background: #2563eb;
-      width: 8px;
-      height: 32px;
-      display: inline-block;
-      border-radius: 4px;
-    }
+        .btn-outline-light {
+            border: 2px solid #1e6f5c;
+            background: white;
+            padding: 0.8rem 1.8rem;
+            border-radius: 40px;
+            text-decoration: none;
+            color: #1e6f5c;
+            font-weight: 600;
+            transition: 0.2s;
+        }
 
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-      gap: 1.2rem;
-    }
+        .btn-outline-light:hover { background: #e6f4f1; }
 
-    .skill-card {
-      background: #11161f;
-      padding: 1rem 1.2rem;
-      border-radius: 20px;
-      border: 1px solid #1f2a3e;
-      font-weight: 500;
-      transition: 0.2s;
-    }
+        /* section umum */
+        .section-block {
+            padding: 2.5rem 2rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
 
-    .skill-card:hover {
-      border-color: #3b82f6;
-      transform: translateY(-2px);
-    }
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #0f2b3d;
+        }
 
-    /* project / portofolio PKL */
-    .project-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 1.8rem;
-    }
+        .section-title i {
+            color: #1e6f5c;
+            font-size: 1.6rem;
+        }
 
-    .project-card {
-      background: #0f131c;
-      border-radius: 24px;
-      padding: 1.5rem;
-      border: 1px solid #1f2a3e;
-      transition: all 0.2s;
-    }
+        /* SKILLS TJKT dengan penjelasan detail */
+        .skills-grid-final {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
 
-    .project-card h3 {
-      font-size: 1.4rem;
-      margin-bottom: 0.75rem;
-    }
+        .skill-card-detail {
+            background: #f8fafc;
+            border-radius: 20px;
+            padding: 1.2rem 1.5rem;
+            border-left: 6px solid #1e6f5c;
+            transition: 0.2s;
+            border: 1px solid #e2e8f0;
+        }
 
-    .project-tag {
-      background: #1e2a3a;
-      padding: 0.2rem 0.8rem;
-      border-radius: 20px;
-      font-size: 0.75rem;
-      display: inline-block;
-      margin-bottom: 1rem;
-    }
+        .skill-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 0.75rem;
+        }
 
-    .btn-outline {
-      display: inline-block;
-      margin-top: 1rem;
-      color: #60a5fa;
-      text-decoration: none;
-      font-weight: 500;
-    }
+        .skill-icon {
+            font-size: 2rem;
+            width: 50px;
+            text-align: center;
+        }
 
-    /* pendidikan + sertifikat */
-    .edu-row {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      background: #11161f;
-      padding: 1.2rem 1.5rem;
-      border-radius: 20px;
-      margin-bottom: 1rem;
-      border: 1px solid #1f2a3e;
-    }
+        .skill-name {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #0f2b3d;
+        }
 
-    /* footer */
-    .footer {
-      background: #080b12;
-      text-align: center;
-      padding: 2rem;
-      font-size: 0.85rem;
-      color: #6c7a91;
-    }
+        .skill-badge {
+            background: #e6f4f1;
+            padding: 0.2rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: #1e6f5c;
+        }
 
-    @media (max-width: 800px) {
-      .hero {
-        grid-template-columns: 1fr;
-        padding: 1.5rem;
-      }
-      .navbar {
-        flex-direction: column;
-        gap: 12px;
-      }
-      .section-full {
-        padding: 1.8rem 1.2rem;
-      }
-    }
-  </style>
+        .skill-description {
+            color: #334155;
+            margin-left: 65px;
+            line-height: 1.6;
+        }
+
+        .skill-list {
+            margin-left: 65px;
+            margin-top: 0.75rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .skill-tag {
+            background: white;
+            border: 1px solid #cbd5e1;
+            padding: 0.2rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        /* SERTIFIKAT GALLERY */
+        .cert-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.8rem;
+            margin-top: 1rem;
+        }
+
+        .cert-card {
+            background: #f8fafc;
+            border-radius: 24px;
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+            transition: 0.25s ease;
+        }
+
+        .cert-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            display: block;
+            background: #e2e8f0;
+        }
+
+        .cert-info {
+            padding: 1rem;
+            font-weight: 600;
+        }
+
+        /* project portfolio */
+        .project-premium {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.8rem;
+        }
+
+        .project-item {
+            background: #f8fafc;
+            padding: 1.5rem;
+            border-radius: 24px;
+            border: 1px solid #e2e8f0;
+            transition: 0.2s;
+        }
+
+        .project-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px -12px rgba(0,0,0,0.1);
+        }
+
+        .footer-full {
+            background: #0f2b3d;
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.8rem;
+            color: #b0c4de;
+        }
+
+        @media (max-width: 800px) {
+            .hero-photo {
+                grid-template-columns: 1fr;
+                padding: 1.5rem;
+            }
+            .nav-premium {
+                flex-direction: column;
+                gap: 12px;
+            }
+            .nav-links a {
+                margin: 0 0.8rem;
+            }
+            .skill-description, .skill-list {
+                margin-left: 0;
+            }
+            .skill-header {
+                flex-wrap: wrap;
+            }
+        }
+    </style>
 </head>
 <body>
-<div class="container">
-  <!-- navbar -->
-  <div class="navbar">
-    <div class="logo">ABDUL BASIT // PORTOFOLIO</div>
-    <div class="nav-links">
-      <a href="#">Home</a>
-      <a href="#">Skill</a>
-      <a href="#">Projects</a>
-      <a href="#">Contact</a>
-    </div>
-  </div>
+<div class="master">
 
-  <!-- hero area padat seperti CEO -->
-  <div class="hero">
-    <div class="hero-left">
-      <div class="badge">🔵 Calon PKL | Teknologi & Inovasi</div>
-      <h1>Abdul Basit <br> <span class="highlight">Al Fakih</span></h1>
-      <p style="font-size: 1.2rem; margin: 1rem 0; color: #b9c7da;">Siswa SMK Wikrama Bogor, siap memberikan dampak nyata selama PKL dengan dedikasi dan skill teknis mumpuni.</p>
-      <div style="display: flex; gap: 1rem; margin-top: 1.5rem;">
-        <a href="#" style="background:#2563eb; padding: 0.6rem 1.5rem; border-radius: 40px; text-decoration: none; color:white; font-weight:500;">📄 Download CV (Canva)</a>
-        <a href="#" style="border:1px solid #3b82f6; padding: 0.6rem 1.5rem; border-radius: 40px; text-decoration: none; color:#93c5fd;">📧 Hubungi Saya</a>
-      </div>
+    <!-- NAVBAR -->
+    <div class="nav-premium">
+        <div class="logo-name">ABDUL BASIT — TJKT · WIKRAMA</div>
+        <div class="nav-links">
+            <a href="#">Beranda</a>
+            <a href="#skills">Kompetensi TJKT</a>
+            <a href="#sertifikat">Sertifikat</a>
+            <a href="#proyek">Proyek</a>
+            <a href="#kontak">Kontak</a>
+        </div>
     </div>
-    <div class="hero-right">
-      <div class="info-item"><span class="info-label">📍 Lokasi</span><span>Bogor, Jawa Barat</span></div>
-      <div class="info-item"><span class="info-label">🎓 Sekolah</span><span>SMK Wikrama Bogor</span></div>
-      <div class="info-item"><span class="info-label">⚡ Bidang</span><span>PPLG / Rekayasa Perangkat Lunak</span></div>
-      <div class="info-item"><span class="info-label">📅 PKL Mulai</span><span>Juli 2026</span></div>
-      <div class="info-item"><span class="info-label">🌐 Website</span><span>basit.work (portofolio)</span></div>
-    </div>
-  </div>
 
-  <!-- SKILLS (padat & modern) -->
-  <div class="section-full">
-    <div class="section-title"><span></span> ⚙️ Core Expertise</div>
-    <div class="skills-grid">
-      <div class="skill-card">💻 HTML5 / CSS3 (Tailwind)</div>
-      <div class="skill-card">⚡ JavaScript (ES6+)</div>
-      <div class="skill-card">🎨 UI/UX Principles</div>
-      <div class="skill-card">🛠️ Git & GitHub</div>
-      <div class="skill-card">📱 Responsive Design</div>
-      <div class="skill-card">🗄️ MySQL / Firebase</div>
+    <!-- HERO DENGAN FOTO -->
+    <div class="hero-photo">
+        <div class="photo-frame">
+            <!-- ⚡ GANTI LINK INI DENGAN LINK FOTO KAMU -->
+            <img src="https://via.placeholder.com/500x500?text=FOTO+ABDUL+BASIT" alt="Foto Abdul Basit Al Fakih">
+        </div>
+        <div class="hero-bio">
+            <div class="badge-list">
+                <span class="badge-premium"><i class="fas fa-map-pin"></i> Bogor, Indonesia</span>
+                <span class="badge-premium"><i class="fas fa-school"></i> SMK Wikrama Bogor</span>
+                <span class="badge-premium"><i class="fas fa-network-wired"></i> TJKT (Teknik Jaringan Komputer)</span>
+            </div>
+            <h1>Abdul Basit <br> <span class="wikrama">Al Fakih</span></h1>
+            <p style="font-size: 1.1rem; margin: 1rem 0; max-width: 90%; color: #334155;"><strong>Cloud Engineer · Network Specialist · Cybersecurity Enthusiast</strong><br>Saya adalah siswa TJKT SMK Wikrama Bogor yang menguasai infrastruktur jaringan, cloud computing, dan keamanan siber. Siap memberikan kontribusi nyata dalam PKL dengan skill hands-on yang sudah saya praktikkan.</p>
+            <div class="btn-group">
+                <a href="#" class="btn-primary"><i class="fas fa-download"></i> CV Canva</a>
+                <a href="#" class="btn-outline-light"><i class="fab fa-github"></i> GitHub</a>
+                <a href="#" class="btn-outline-light"><i class="fab fa-linkedin"></i> LinkedIn</a>
+            </div>
+        </div>
     </div>
-  </div>
 
-  <!-- PROYEK PORTOFOLIO buat PKL -->
-  <div class="section-full">
-    <div class="section-title"><span></span> 🚀 Project Portfolio (PKL Ready)</div>
-    <div class="project-grid">
-      <div class="project-card">
-        <div class="project-tag">Web Company Profile</div>
-        <h3>WikiBiz Hub</h3>
-        <p>Landing page modern untuk UMKM lokal, fully responsive dengan dark mode, kecepatan loading tinggi.</p>
-        <a href="#" class="btn-outline">Lihat project →</a>
-      </div>
-      <div class="project-card">
-        <div class="project-tag">Sistem Informasi</div>
-        <h3>Presensi PKL Digital</h3>
-        <p>Aplikasi sederhana untuk mencatat kehadiran PKL menggunakan localStorage + generate PDF.</p>
-        <a href="#" class="btn-outline">Lihat project →</a>
-      </div>
-      <div class="project-card">
-        <div class="project-tag">UI Portfolio</div>
-        <h3>This Website (CEO Style)</h3>
-        <p>Portofolio padat tanpa space lebar, full information & grid system modern.</p>
-        <a href="#" class="btn-outline">Lihat source →</a>
-      </div>
-    </div>
-  </div>
+    <!-- ⭐ SKILLS TJKT LENGKAP DENGAN PENJELASAN ⭐ -->
+    <div class="section-block" id="skills">
+        <div class="section-title"><i class="fas fa-microchip"></i> Kompetensi TJKT · Yang Saya Kuasai</div>
+        <div class="skills-grid-final">
 
-  <!-- Pendidikan & Prestasi -->
-  <div class="section-full">
-    <div class="section-title"><span></span> 🎓 Education & Achievement</div>
-    <div class="edu-row">
-      <div><strong>SMK Wikrama Bogor</strong><br>PPLG (Pengembangan Perangkat Lunak dan Gim)</div>
-      <div>2024 - Sekarang</div>
-    </div>
-    <div class="edu-row">
-      <div><strong>📌 Juara 2 Web Development Competition</strong><br>Lomba internal Wikrama 2025</div>
-      <div>2025</div>
-    </div>
-    <div class="edu-row">
-      <div><strong>✅ Sertifikasi BNSP Junior Web Developer</strong><br>(on process)</div>
-      <div>2026</div>
-    </div>
-  </div>
+            <!-- AWS -->
+            <div class="skill-card-detail">
+                <div class="skill-header">
+                    <div class="skill-icon"><i class="fab fa-aws"></i></div>
+                    <div class="skill-name">Amazon Web Services (AWS)</div>
+                    <div class="skill-badge">Cloud Computing</div>
+                </div>
+                <div class="skill-description">
+                    Saya telah belajar dan mempraktikkan layanan AWS seperti EC2 untuk virtual server, S3 untuk penyimpanan objek, serta IAM untuk manajemen akses. Saya juga pernah mendeploy web sederhana menggunakan EC2 dan mengkonfigurasi security group. AWS menjadi fondasi cloud yang saya kuasai untuk kebutuhan infrastruktur modern.
+                </div>
+                <div class="skill-list">
+                    <span class="skill-tag">EC2</span>
+                    <span class="skill-tag">S3</span>
+                    <span class="skill-tag">IAM</span>
+                    <span class="skill-tag">VPC</span>
+                    <span class="skill-tag">CloudWatch</span>
+                </div>
+            </div>
 
-  <!-- Kontak / Sosmed -->
-  <div class="section-full">
-    <div class="section-title"><span></span> 📫 Connect With Me</div>
-    <div style="display: flex; flex-wrap: wrap; gap: 1.5rem; justify-content: space-between; align-items: center;">
-      <div>📧 abdul.basit@wikrama.sch.id</div>
-      <div>📞 +62 85771082319</div>
-      <div>💼 GitHub : /abdulbasit-fakih</div>
-      <div>📷 Instagram : @abdulbasit_</div>
-    </div>
-    <div style="margin-top: 2rem; background: #0a0f18; padding: 1rem; border-radius: 20px; text-align: center;">
-      ⚡ "Siap berkontribusi dan belajar maksimal selama PKL — integritas, disiplin, dan karya nyata."
-    </div>
-  </div>
+            <!-- MIKROTIK -->
+            <div class="skill-card-detail">
+                <div class="skill-header">
+                    <div class="skill-icon"><i class="fas fa-router"></i></div>
+                    <div class="skill-name">MikroTik · RouterOS</div>
+                    <div class="skill-badge">Network Engineering</div>
+                </div>
+                <div class="skill-description">
+                    Saya mahir mengkonfigurasi MikroTik RouterOS untuk keperluan routing, bandwidth management (simple queue & queue tree), firewall filter, NAT, DHCP server, serta hotspot. Saya pernah membuat simulasi jaringan kantor dengan VLAN dan load balancing menggunakan PCC. MikroTik adalah keahlian utama saya dalam dunia networking.
+                </div>
+                <div class="skill-list">
+                    <span class="skill-tag">NAT & Routing</span>
+                    <span class="skill-tag">Firewall Filter</span>
+                    <span class="skill-tag">Bandwidth Management</span>
+                    <span class="skill-tag">Hotspot</span>
+                    <span class="skill-tag">VLAN & PCC</span>
+                </div>
+            </div>
 
-  <div class="footer">
-    © 2026 Abdul Basit Al Fakih — Portofolio PKL SMK Wikrama Bogor. All rights reserved.
-  </div>
+            <!-- DEBIAN SERVER -->
+            <div class="skill-card-detail">
+                <div class="skill-header">
+                    <div class="skill-icon"><i class="fab fa-linux"></i></div>
+                    <div class="skill-name">Debian Server · Linux Admin</div>
+                    <div class="skill-badge">Server Administration</div>
+                </div>
+                <div class="skill-description">
+                    Saya menguasai administrasi server Debian meliputi instalasi, konfigurasi network interface, SSH, manajemen user & permission, LAMP stack (Apache, MySQL, PHP), serta DNS server (bind9), DHCP server, dan FTP. Saya juga familiar dengan bash scripting untuk automasi sederhana. Debian menjadi andalan saya untuk membangun server yang stabil dan aman.
+                </div>
+                <div class="skill-list">
+                    <span class="skill-tag">LAMP Stack</span>
+                    <span class="skill-tag">Bind9 DNS</span>
+                    <span class="skill-tag">DHCP Server</span>
+                    <span class="skill-tag">SSH & SFTP</span>
+                    <span class="skill-tag">Bash Script</span>
+                </div>
+            </div>
+
+            <!-- CYBERSECURITY -->
+            <div class="skill-card-detail">
+                <div class="skill-header">
+                    <div class="skill-icon"><i class="fas fa-shield-haltered"></i></div>
+                    <div class="skill-name">Cybersecurity</div>
+                    <div class="skill-badge">Keamanan Siber</div>
+                </div>
+                <div class="skill-description">
+                    Saya memiliki pemahaman dasar tentang etika hacking, footprinting & reconnaissance, vulnerability scanning menggunakan Nmap, analisis malware, serta implementasi keamanan jaringan seperti firewall, IDS/IPS, dan enkripsi data. Saya juga belajar tentang praktik secure coding dan OWASP Top 10. Cybersecurity adalah passion saya untuk melindungi infrastruktur digital.
+                </div>
+                <div class="skill-list">
+                    <span class="skill-tag">Nmap Scanning</span>
+                    <span class="skill-tag">Firewall Hardening</span>
+                    <span class="skill-tag">OWASP Top 10</span>
+                    <span class="skill-tag">Wireshark</span>
+                    <span class="skill-tag">Kali Linux</span>
+                </div>
+            </div>
+
+            <!-- WORDPRESS -->
+            <div class="skill-card-detail">
+                <div class="skill-header">
+                    <div class="skill-icon"><i class="fab fa-wordpress"></i></div>
+                    <div class="skill-name">WordPress Development</div>
+                    <div class="skill-badge">CMS · Web Dev</div>
+                </div>
+                <div class="skill-description">
+                    Saya mampu membangun website profesional menggunakan WordPress, mulai dari instalasi, konfigurasi theme (custom dengan Elementor/divi), manajemen plugin, optimasi SEO, hingga migrasi dan maintenance. Saya sudah membuat beberapa website untuk project sekolah dan klien kecil. WordPress memungkinkan saya menyajikan solusi web dengan cepat tanpa mengorbankan kualitas.
+                </div>
+                <div class="skill-list">
+                    <span class="skill-tag">Custom Theme</span>
+                    <span class="skill-tag">Elementor Pro</span>
+                    <span class="skill-tag">SEO Optimization</span>
+                    <span class="skill-tag">WooCommerce</span>
+                    <span class="skill-tag">Migration</span>
+                </div>
+            </div>
+
+            <!-- WEB DEVELOPMENT + TJKT LAINNYA -->
+            <div class="skill-card-detail">
+                <div class="skill-header">
+                    <div class="skill-icon"><i class="fas fa-code"></i></div>
+                    <div class="skill-name">Web Development & Lainnya</div>
+                    <div class="skill-badge">Fullstack · Tools</div>
+                </div>
+                <div class="skill-description">
+                    Selain keahlian di atas, saya juga menguasai HTML, CSS, JavaScript, PHP native, serta MySQL. Saya bisa membangun aplikasi web CRUD sederhana, REST API, dan mengintegrasikannya dengan database. Saya juga familiar dengan Git, Docker dasar, Figma untuk UI/UX, dan Cisco Packet Tracer untuk simulasi jaringan skala besar.
+                </div>
+                <div class="skill-list">
+                    <span class="skill-tag">PHP Native</span>
+                    <span class="skill-tag">MySQL</span>
+                    <span class="skill-tag">JavaScript</span>
+                    <span class="skill-tag">Docker Basic</span>
+                    <span class="skill-tag">Cisco Packet Tracer</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SERTIFIKAT (GANTI LINK GAMBAR) -->
+    <div class="section-block" id="sertifikat">
+        <div class="section-title"><i class="fas fa-award"></i> Sertifikat & Penghargaan</div>
+        <div class="cert-grid">
+            <div class="cert-card">
+                <img src="https://via.placeholder.com/400x200?text=SERTIFIKAT+AWS+Cloud+Foundation" alt="AWS Certificate">
+                <div class="cert-info"><strong>AWS Cloud Foundation</strong><br>Amazon Web Services · 2025</div>
+            </div>
+            <div class="cert-card">
+                <img src="https://via.placeholder.com/400x200?text=MikroTik+Certification+MTCNA" alt="MikroTik">
+                <div class="cert-info"><strong>MTCNA (MikroTik Certified)</strong><br>MikroTik Academy · 2025</div>
+            </div>
+            <div class="cert-card">
+                <img src="https://via.placeholder.com/400x200?text=Certified+Ethical+Hacker+Basic" alt="Cybersecurity">
+                <div class="cert-info"><strong>Cybersecurity Fundamental</strong><br>Cisco Networking Academy · 2025</div>
+            </div>
+            <div class="cert-card">
+                <img src="https://via.placeholder.com/400x200?text=WordPress+Expert+Certification" alt="WordPress">
+                <div class="cert-info"><strong>WordPress Expert</strong><br>BNSP/LSP · 2025</div>
+            </div>
+        </div>
+        <p style="margin-top: 1rem; font-size: 0.8rem; text-align: center; color: #5f6f8a;"><i class="fas fa-image"></i> Ganti semua placeholder dengan foto sertifikat aslimu ya!</p>
+    </div>
+
+    <!-- PROYEK YANG PERNAH DIKERJAKAN -->
+    <div class="section-block" id="proyek">
+        <div class="section-title"><i class="fas fa-rocket"></i> Proyek TJKT · Yang Saya Kerjakan</div>
+        <div class="project-premium">
+            <div class="project-item">
+                <i class="fas fa-cloud" style="font-size: 2rem; color:#1e6f5c;"></i>
+                <h3 style="margin: 12px 0 8px;">Deploy Web di AWS EC2</h3>
+                <p>Mendeploy website portfolio menggunakan instance EC2, konfigurasi security group, dan domain routing. Selesai dengan uptime monitoring menggunakan CloudWatch.</p>
+            </div>
+            <div class="project-item">
+                <i class="fas fa-network-wired" style="font-size: 2rem; color:#1e6f5c;"></i>
+                <h3 style="margin: 12px 0 8px;">Simulasi Jaringan MikroTik</h3>
+                <p>Membangun jaringan kantor dengan 3 VLAN, routing antar VLAN, bandwidth management, serta firewall filtering. Dilakukan di RouterOS dan GNS3.</p>
+            </div>
+            <div class="project-item">
+                <i class="fas fa-server" style="font-size: 2rem; color:#1e6f5c;"></i>
+                <h3 style="margin: 12px 0 8px;">Debian Server untuk Web Hosting</h3>
+                <p>Instalasi LAMP stack, virtual host untuk multiple domain, serta konfigurasi backup otomatis menggunakan cron job.</p>
+            </div>
+            <div class="project-item">
+                <i class="fas fa-shield-haltered" style="font-size: 2rem; color:#1e6f5c;"></i>
+                <h3 style="margin: 12px 0 8px;">Vulnerability Assessment Lab</h3>
+                <p>Menggunakan Nmap dan OpenVAS untuk memindai jaringan internal, lalu melakukan hardening sesuai rekomendasi.</p>
+            </div>
+            <div class="project-item">
+                <i class="fab fa-wordpress" style="font-size: 2rem; color:#1e6f5c;"></i>
+                <h3 style="margin: 12px 0 8px;">Website Profil SMK + CMS</h3>
+                <p>Membangun website profil sekolah dengan WordPress, custom theme, serta integrasi kontak form dan maps.</p>
+            </div>
+            <div class="project-item">
+                <i class="fas fa-laptop-code" style="font-size: 2rem; color:#1e6f5c;"></i>
+                <h3 style="margin: 12px 0 8px;">Portofolio Web (Ini!)</h3>
+                <p>Portofolio versi final dengan HTML/CSS modern, menampilkan semua skill TJKT yang saya kuasai.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- KONTAK -->
+    <div class="section-block" id="kontak">
+        <div class="section-title"><i class="fas fa-paper-plane"></i> Hubungi Saya — Siap PKL & Kolaborasi</div>
+        <div style="display: flex; flex-wrap: wrap; gap: 1.5rem; justify-content: space-between; background: #f1f5f9; padding: 1.5rem; border-radius: 28px;">
+            <div><i class="fas fa-envelope" style="color:#1e6f5c;"></i> abdul.basit@wikrama.sch.id</div>
+            <div><i class="fab fa-whatsapp" style="color:#1e6f5c;"></i> +62 812 3456 7890</div>
+            <div><i class="fab fa-github" style="color:#1e6f5c;"></i> github/abdulbasit-tjkt</div>
+            <div><i class="fab fa-instagram" style="color:#1e6f5c;"></i> @abdulbasit_</div>
+        </div>
+        <div style="margin-top: 1.8rem; background: #e6f4f1; padding: 1.2rem; border-radius: 24px; text-align: center; border-left: 5px solid #1e6f5c; font-weight: 500;">
+            🚀 “Saya tidak hanya belajar teori — saya membangun, mengkonfigurasi, dan mengamankan infrastruktur digital. Portofolio ini adalah bukti nyata kesiapan saya untuk PKL dan dunia industri.”
+        </div>
+    </div>
+
+    <div class="footer-full">
+        © 2026 Abdul Basit Al Fakih — SMK Wikrama Bogor | TJKT · Cloud · Network · Security | Full Portfolio
+    </div>
 </div>
 </body>
 </html>
