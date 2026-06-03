@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Abdul Basit Al Fakih | Portofolio PKL</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #0a0c10;
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, sans-serif;
+      color: #eef2ff;
+      line-height: 1.5;
+    }
+
+    /* full padat, gaada margin lebar */
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      background: #0f1117;
+    }
+
+    /* navbar sederhana */
+    .navbar {
+      background: #080b12;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      border-bottom: 1px solid #1e293b;
+    }
+
+    .logo {
+      font-weight: 700;
+      font-size: 1.5rem;
+      letter-spacing: -0.5px;
+      background: linear-gradient(135deg, #ffffff, #94a3b8);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      font-weight: 500;
+    }
+
+    .nav-links a {
+      color: #cbd5e6;
+      text-decoration: none;
+      transition: 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: white;
+    }
+
+    /* HERO section — padat kaya CEO */
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 2rem;
+      padding: 2.5rem 2rem;
+      background: #0b0e15;
+      border-bottom: 1px solid #1e293b;
+    }
+
+    .hero-left h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+      letter-spacing: -1px;
+    }
+
+    .hero-left .highlight {
+      color: #3b82f6;
+      border-bottom: 2px solid #3b82f6;
+      display: inline-block;
+    }
+
+    .badge {
+      background: #1e293b;
+      display: inline-block;
+      padding: 0.25rem 1rem;
+      border-radius: 30px;
+      font-size: 0.85rem;
+      margin: 1rem 0;
+      color: #93c5fd;
+    }
+
+    .hero-right {
+      background: #11161f;
+      padding: 1.5rem;
+      border-radius: 24px;
+      border: 1px solid #1f2a3e;
+    }
+
+    .info-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid #1e2a3a;
+    }
+
+    .info-label {
+      font-weight: 600;
+      color: #9ca3af;
+    }
+
+    /* bagian skill & tools full grid */
+    .section-full {
+      padding: 2.5rem 2rem;
+      border-bottom: 1px solid #1e293b;
+    }
+
+    .section-title {
+      font-size: 1.8rem;
+      font-weight: 600;
+      margin-bottom: 2rem;
+      letter-spacing: -0.3px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-title span {
+      background: #2563eb;
+      width: 8px;
+      height: 32px;
+      display: inline-block;
+      border-radius: 4px;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 1.2rem;
+    }
+
+    .skill-card {
+      background: #11161f;
+      padding: 1rem 1.2rem;
+      border-radius: 20px;
+      border: 1px solid #1f2a3e;
+      font-weight: 500;
+      transition: 0.2s;
+    }
+
+    .skill-card:hover {
+      border-color: #3b82f6;
+      transform: translateY(-2px);
+    }
+
+    /* project / portofolio PKL */
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.8rem;
+    }
+
+    .project-card {
+      background: #0f131c;
+      border-radius: 24px;
+      padding: 1.5rem;
+      border: 1px solid #1f2a3e;
+      transition: all 0.2s;
+    }
+
+    .project-card h3 {
+      font-size: 1.4rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .project-tag {
+      background: #1e2a3a;
+      padding: 0.2rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      display: inline-block;
+      margin-bottom: 1rem;
+    }
+
+    .btn-outline {
+      display: inline-block;
+      margin-top: 1rem;
+      color: #60a5fa;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    /* pendidikan + sertifikat */
+    .edu-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      background: #11161f;
+      padding: 1.2rem 1.5rem;
+      border-radius: 20px;
+      margin-bottom: 1rem;
+      border: 1px solid #1f2a3e;
+    }
+
+    /* footer */
+    .footer {
+      background: #080b12;
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.85rem;
+      color: #6c7a91;
+    }
+
+    @media (max-width: 800px) {
+      .hero {
+        grid-template-columns: 1fr;
+        padding: 1.5rem;
+      }
+      .navbar {
+        flex-direction: column;
+        gap: 12px;
+      }
+      .section-full {
+        padding: 1.8rem 1.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <!-- navbar -->
+  <div class="navbar">
+    <div class="logo">ABDUL BASIT // PORTOFOLIO</div>
+    <div class="nav-links">
+      <a href="#">Home</a>
+      <a href="#">Skill</a>
+      <a href="#">Projects</a>
+      <a href="#">Contact</a>
+    </div>
+  </div>
+
+  <!-- hero area padat seperti CEO -->
+  <div class="hero">
+    <div class="hero-left">
+      <div class="badge">🔵 Calon PKL | Teknologi & Inovasi</div>
+      <h1>Abdul Basit <br> <span class="highlight">Al Fakih</span></h1>
+      <p style="font-size: 1.2rem; margin: 1rem 0; color: #b9c7da;">Siswa SMK Wikrama Bogor, siap memberikan dampak nyata selama PKL dengan dedikasi dan skill teknis mumpuni.</p>
+      <div style="display: flex; gap: 1rem; margin-top: 1.5rem;">
+        <a href="#" style="background:#2563eb; padding: 0.6rem 1.5rem; border-radius: 40px; text-decoration: none; color:white; font-weight:500;">📄 Download CV (Canva)</a>
+        <a href="#" style="border:1px solid #3b82f6; padding: 0.6rem 1.5rem; border-radius: 40px; text-decoration: none; color:#93c5fd;">📧 Hubungi Saya</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="info-item"><span class="info-label">📍 Lokasi</span><span>Bogor, Jawa Barat</span></div>
+      <div class="info-item"><span class="info-label">🎓 Sekolah</span><span>SMK Wikrama Bogor</span></div>
+      <div class="info-item"><span class="info-label">⚡ Bidang</span><span>PPLG / Rekayasa Perangkat Lunak</span></div>
+      <div class="info-item"><span class="info-label">📅 PKL Mulai</span><span>Juli 2026</span></div>
+      <div class="info-item"><span class="info-label">🌐 Website</span><span>basit.work (portofolio)</span></div>
+    </div>
+  </div>
+
+  <!-- SKILLS (padat & modern) -->
+  <div class="section-full">
+    <div class="section-title"><span></span> ⚙️ Core Expertise</div>
+    <div class="skills-grid">
+      <div class="skill-card">💻 HTML5 / CSS3 (Tailwind)</div>
+      <div class="skill-card">⚡ JavaScript (ES6+)</div>
+      <div class="skill-card">🎨 UI/UX Principles</div>
+      <div class="skill-card">🛠️ Git & GitHub</div>
+      <div class="skill-card">📱 Responsive Design</div>
+      <div class="skill-card">🗄️ MySQL / Firebase</div>
+    </div>
+  </div>
+
+  <!-- PROYEK PORTOFOLIO buat PKL -->
+  <div class="section-full">
+    <div class="section-title"><span></span> 🚀 Project Portfolio (PKL Ready)</div>
+    <div class="project-grid">
+      <div class="project-card">
+        <div class="project-tag">Web Company Profile</div>
+        <h3>WikiBiz Hub</h3>
+        <p>Landing page modern untuk UMKM lokal, fully responsive dengan dark mode, kecepatan loading tinggi.</p>
+        <a href="#" class="btn-outline">Lihat project →</a>
+      </div>
+      <div class="project-card">
+        <div class="project-tag">Sistem Informasi</div>
+        <h3>Presensi PKL Digital</h3>
+        <p>Aplikasi sederhana untuk mencatat kehadiran PKL menggunakan localStorage + generate PDF.</p>
+        <a href="#" class="btn-outline">Lihat project →</a>
+      </div>
+      <div class="project-card">
+        <div class="project-tag">UI Portfolio</div>
+        <h3>This Website (CEO Style)</h3>
+        <p>Portofolio padat tanpa space lebar, full information & grid system modern.</p>
+        <a href="#" class="btn-outline">Lihat source →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pendidikan & Prestasi -->
+  <div class="section-full">
+    <div class="section-title"><span></span> 🎓 Education & Achievement</div>
+    <div class="edu-row">
+      <div><strong>SMK Wikrama Bogor</strong><br>PPLG (Pengembangan Perangkat Lunak dan Gim)</div>
+      <div>2024 - Sekarang</div>
+    </div>
+    <div class="edu-row">
+      <div><strong>📌 Juara 2 Web Development Competition</strong><br>Lomba internal Wikrama 2025</div>
+      <div>2025</div>
+    </div>
+    <div class="edu-row">
+      <div><strong>✅ Sertifikasi BNSP Junior Web Developer</strong><br>(on process)</div>
+      <div>2026</div>
+    </div>
+  </div>
+
+  <!-- Kontak / Sosmed -->
+  <div class="section-full">
+    <div class="section-title"><span></span> 📫 Connect With Me</div>
+    <div style="display: flex; flex-wrap: wrap; gap: 1.5rem; justify-content: space-between; align-items: center;">
+      <div>📧 abdul.basit@wikrama.sch.id</div>
+      <div>📞 +62 85771082319</div>
+      <div>💼 GitHub : /abdulbasit-fakih</div>
+      <div>📷 Instagram : @abdulbasit_</div>
+    </div>
+    <div style="margin-top: 2rem; background: #0a0f18; padding: 1rem; border-radius: 20px; text-align: center;">
+      ⚡ "Siap berkontribusi dan belajar maksimal selama PKL — integritas, disiplin, dan karya nyata."
+    </div>
+  </div>
+
+  <div class="footer">
+    © 2026 Abdul Basit Al Fakih — Portofolio PKL SMK Wikrama Bogor. All rights reserved.
+  </div>
+</div>
+</body>
+</html>
